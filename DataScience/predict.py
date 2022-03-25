@@ -1,25 +1,34 @@
 import pandas as pd
-
 from keras.models import load_model
+
+# TODO: add reading data from json
+# TODO: add logging
+# TODO: add exceptions for use cases
+
+model = load_model("trained_models/model_epoch200_adam001.ckpt")
 
 
 def data_prep(data):
+    """
+    :param data: pandas DataFrame with data
+    :return: numpy array with prepared data to model input
+    """
     data = pd.get_dummies(data, columns=['Origin'])  # dummies for category column
+    return data.values
 
-    return data
 
-
-def predict():
-    return 1
+def predict(data):
+    results = model.predict(data).flatten()
+    return results
 
 
 if __name__ == "__main__":
     dataset = pd.read_csv("data/Auto_MPG.csv")
 
-    # TODO: change into error when nans met
+    # TODO: change when input json
     dataset = dataset.dropna()  # drop all rows if any NaN
-    pred_data = dataset.drop(["MPG"], axis=1).values
+    dataset = dataset.drop(["MPG"], axis=1)
 
-    pred_data = data_prep(pred_data)
-
-    print()
+    dataset = data_prep(dataset)
+    results = predict(dataset)
+    print(results)
