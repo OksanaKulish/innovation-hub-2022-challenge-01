@@ -1,10 +1,13 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
 from matplotlib import pyplot as plt
+
+from sklearn.model_selection import train_test_split
 
 from tensorflow import keras
 from keras import Sequential
 from keras.layers import Dense
+
+from utils.cat_columns_encoder import fit_encoder, transform_cat_columns, replace_categorical_column
 
 random_state = 42
 
@@ -46,7 +49,12 @@ if __name__ == "__main__":
 
     # data prep for training
     dataset = dataset.dropna()  # drop all rows if any NaN
-    dataset = pd.get_dummies(dataset, columns=['Origin'])  # dummies for category column
+
+    # encode categorical columns
+    cat_column = dataset["Origin"].values
+    fit_encoder(cat_column)
+    encoded_columns = transform_cat_columns(cat_column)
+    dataset = replace_categorical_column(dataset, "Origin", encoded_columns)
 
     target = dataset["MPG"].values
     data = dataset.drop(["MPG"], axis=1).values
