@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "test13"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-o362aq1hc4oy"
+s3_prefix = "test13"
+region = "eu-west-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = ["InferenceFunction=439223726434.dkr.ecr.eu-west-2.amazonaws.com/test11f696282a/inferencefunction7c73919drepo"]
