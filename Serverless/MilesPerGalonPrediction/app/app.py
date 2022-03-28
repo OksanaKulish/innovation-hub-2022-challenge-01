@@ -14,10 +14,13 @@ from cat_columns_encoder import transform_cat_columns, replace_categorical_colum
 import json
 from flask_lambda import FlaskLambda
 from flask import request
+from flask_cors import CORS, cross_origin
 
 model = load_model(MODEL_PATH)
 
 app = FlaskLambda(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 def data_prep(event):
@@ -47,6 +50,7 @@ def predict(data):
     results = model.predict(data).flatten()
     return results
 
+@cross_origin()
 @app.route('/getValue', methods=['GET', 'POST'])
 def getValue():
     dataset = data_prep(request.json)
@@ -64,6 +68,7 @@ def getValue():
         {'Content-Type': 'application/json'}
     )
 
+@cross_origin()
 @app.route('/ping', methods=['GET', 'POST'])
 def ping():
     return {
