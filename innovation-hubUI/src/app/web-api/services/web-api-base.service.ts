@@ -4,51 +4,55 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 @Injectable()
 export abstract class WebApiBaseService {
-    private readonly _http: HttpClient;
-    private _apiEndpoint: string;
+  private readonly _http: HttpClient;
+  private _apiEndpoint: string;
 
-    protected constructor(http: HttpClient) {
-        this._http = http;
-        this._apiEndpoint  = this.normalize(environment.apiUrl)
-    }
-
-    private normalize(uri: string): string {
-      return uri.endsWith('/') ? uri : uri + '/';
+  protected constructor(http: HttpClient) {
+    this._http = http;
+    this._apiEndpoint = this.normalize(environment.apiUrl);
   }
 
-    protected async requestAsync<T>(method: string, relativeApiUrl: string, body?: any): Promise<T> {
-        const url = environment.apiUrl + relativeApiUrl;
-
-        const options = {
-            url: url,
-            responseType: 'json' as 'json',
-            body: body,
-            headers: new HttpHeaders(),
-            observe: 'response' as 'response'
-        };
-
-        if (typeof body === 'string') {
-          options.headers = options.headers.append('Content-Type', `text/plain`);
-      }
-      const responseObservable = this._http.request(method, url, options);
-      const response = await responseObservable.toPromise()??Object;
-
-      return (response as any) as T;
+  private normalize(uri: string): string {
+    return uri.endsWith('/') ? uri : uri + '/';
   }
 
-    protected getAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {
-        return this.requestAsync<T>('get', relativeApiUrl, body);
-    }
+  protected async requestAsync<T>(
+    method: string,
+    relativeApiUrl: string,
+    body?: any
+  ): Promise<T> {
+    const url = environment.apiUrl + relativeApiUrl;
 
-    protected postAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {
-        return this.requestAsync<T>('post', relativeApiUrl, body);
-    }
+    const options = {
+      url: url,
+      responseType: 'json' as 'json',
+      body: body,
+      headers: new HttpHeaders(),
+      observe: 'response' as 'response',
+    };
 
-    protected putAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {
-        return this.requestAsync<T>('put', relativeApiUrl, body);
+    if (typeof body === 'string') {
+      options.headers = options.headers.append('Content-Type', `text/plain`);
     }
+    const responseObservable = this._http.request(method, url, options);
+    const response = (await responseObservable.toPromise()) ?? Object;
 
-    protected deleteAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {
-        return this.requestAsync<T>('delete', relativeApiUrl, body);
-    }
+    return response as any as T;
+  }
+
+  protected getAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {
+    return this.requestAsync<T>('get', relativeApiUrl, body);
+  }
+
+  protected postAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {
+    return this.requestAsync<T>('post', relativeApiUrl, body);
+  }
+
+  protected putAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {
+    return this.requestAsync<T>('put', relativeApiUrl, body);
+  }
+
+  protected deleteAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {
+    return this.requestAsync<T>('delete', relativeApiUrl, body);
+  }
 }
