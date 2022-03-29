@@ -31,8 +31,6 @@ def data_prep(event):
     # check lengths of variables
     # TODO: change when the format of multirows json will be known
     value_length = 1
-    if isinstance(event, list):
-        event = dict(event)
     data = pd.DataFrame(event, index=list(range(value_length)))
 
     # check columns order
