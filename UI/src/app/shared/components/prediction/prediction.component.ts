@@ -6,7 +6,7 @@ import { PredictService } from 'src/app/web-api/services/predict.service';
 @Component({
   selector: 'app-prediction',
   templateUrl: './prediction.component.html',
-  styleUrls: ['./prediction.component.scss'],
+  styleUrls: ['./prediction.component.scss', '../../../../assets/material-custom.scss'],
 })
 export class PredictionComponent implements OnInit {
   public form = new FormGroup({
