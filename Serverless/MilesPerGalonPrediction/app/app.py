@@ -61,7 +61,7 @@ def getValuePost():
     print(results)
 
     data = {
-        "predicted_label " : str(results[0])
+        "predicted_label" : str(results[0])
     }
 
     print(data)
