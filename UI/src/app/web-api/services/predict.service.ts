@@ -5,12 +5,11 @@ import { InputDataDto } from '../dto';
 
 @Injectable()
 export class PredictService extends WebApiBaseService {
+  public constructor(private http: HttpClient) {
+    super(http);
+  }
 
-    public constructor(private http: HttpClient ) {
-        super(http);
-    }
-
-    public async getValueAsync(data: InputDataDto): Promise<number> {
-        return await this.postAsync<number>(`/getValue`, data);
-    }
+  public async getValueAsync(data: InputDataDto): Promise<InputDataDto> {
+    return await this.postAsync<InputDataDto>(`getValue`, data);
+  }
 }

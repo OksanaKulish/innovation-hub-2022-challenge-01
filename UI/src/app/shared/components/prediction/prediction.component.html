@@ -1,0 +1,69 @@
+<mat-card>
+  <mat-card-title> Data configuration </mat-card-title>
+  <mat-card-content>
+    <section class="input-section">
+      <form [formGroup]="form" (ngSubmit)="onPredict()" method="POST">
+        <mat-form-field class="input-margin input-width" appearance="fill">
+          <mat-label> Cylinders </mat-label>
+          <input matInput type="number" formControlName="Cylinders" />
+        </mat-form-field>
+        <!-- <div
+          *ngIf="Cylinders?.invalid && (Cylinders?.dirty || Cylinders?.touched)"
+          class="alert alert-danger"
+        >
+          <span *ngIf="Cylinders?.errors?.['required']">Name is required.</span>
+        </div> -->
+
+        <mat-form-field class="input-margin input-width" appearance="fill">
+          <mat-label> Displacement </mat-label>
+          <input matInput type="number" formControlName="Displacement" />
+        </mat-form-field>
+
+        <mat-form-field class="input-margin input-width" appearance="fill">
+          <mat-label> Horsepower </mat-label>
+          <input matInput type="number" formControlName="Horsepower" />
+        </mat-form-field>
+
+        <mat-form-field class="input-margin input-width" appearance="fill">
+          <mat-label> Weight </mat-label>
+          <input matInput type="number" formControlName="Weight" />
+        </mat-form-field>
+
+        <mat-form-field class="input-margin input-width" appearance="fill">
+          <mat-label> Acceleration </mat-label>
+          <input matInput type="number" formControlName="Acceleration" />
+        </mat-form-field>
+
+        <mat-form-field class="input-margin input-width" appearance="fill">
+          <mat-label> Model year </mat-label>
+          <input matInput type="number" formControlName="Model year" />
+        </mat-form-field>
+
+        <mat-form-field class="input-margin input-width" appearance="fill">
+          <mat-label> Origin </mat-label>
+          <input matInput type="number" formControlName="Origin" />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!form.valid"
+        >
+          Predict
+        </button>
+        <button mat-raised-button type="button" (click)="onResetPrediction()">
+          Reset
+        </button>
+      </form>
+    </section>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="example-result-card">
+  <mat-card-content>
+    <h2>Predicted Result</h2>
+    <br />
+    <br />
+  </mat-card-content>
+  <p>{{ predictedValue }}</p>
+</mat-card>

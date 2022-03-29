@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "innovation-hubUI": {
+    "UI": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/innovation-hub-ui",
+            "outputPath": "dist/ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "innovation-hubUI:build:production"
+              "browserTarget": "UI:build:production"
             },
             "development": {
-              "browserTarget": "innovation-hubUI:build:development"
+              "browserTarget": "UI:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,8 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "innovation-hubUI:build"
+            "browserTarget": "UI:build",
+            "proxyConfig": "src/proxy.conf.json"
           }
         },
         "test": {
@@ -109,5 +110,5 @@
       }
     }
   },
-  "defaultProject": "innovation-hubUI"
+  "defaultProject": "UI"
 }

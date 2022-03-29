@@ -1,9 +1,9 @@
 export class InputDataDto {
-  public cylinder!: number
-  public displacement!: number
-  public horsepower!: number
-  public weight!: number
-  public acceleration!: number
-  public modelYear!: number
-  public origin!: number
+  public Cylinders!: string;
+  public Displacement!: string;
+  public Horsepower!: string;
+  public Weight!: string;
+  public Acceleration!: string;
+  public "Model year"!: string;
+  public Origin!: string;
 }

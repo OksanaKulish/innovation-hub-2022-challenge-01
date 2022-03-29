@@ -21,7 +21,7 @@ export abstract class WebApiBaseService {
     relativeApiUrl: string,
     body?: any
   ): Promise<T> {
-    const url = environment.apiUrl + relativeApiUrl;
+    const url = this._apiEndpoint + relativeApiUrl;
 
     const options = {
       url: url,
@@ -32,12 +32,15 @@ export abstract class WebApiBaseService {
     };
 
     if (typeof body === 'string') {
-      options.headers = options.headers.append('Content-Type', `text/plain`);
+      options.headers = options.headers.append(
+        'Content-Type',
+        `application/json`
+      );
     }
     const responseObservable = this._http.request(method, url, options);
-    const response = (await responseObservable.toPromise()) ?? Object;
+    const response = await responseObservable.toPromise();
 
-    return response as any as T;
+    return this.parseResponseBody<T>(response);
   }
 
   protected getAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {
@@ -54,5 +57,47 @@ export abstract class WebApiBaseService {
 
   protected deleteAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {
     return this.requestAsync<T>('delete', relativeApiUrl, body);
+  }
+
+  public text: string = '';
+
+  protected async parseResponseBody<T>(
+    response: HttpResponse<Object> | undefined
+  ): Promise<T> {
+    if (response == undefined) {
+      console.error('Response is undefined!!!!');
+      return Object as any as T;
+    }
+
+    if (response.body) {
+      if (typeof response.body === 'string') {
+        this.text = response.body;
+      } else {
+        this.text = JSON.stringify(response.body);
+      }
+    }
+
+    if (!this.text) {
+      console.log(this.text);
+      return this.text as any as T;
+    }
+
+    if (this.text.startsWith('[') || this.text.startsWith('{')) {
+      return JSON.parse(this.text);
+    }
+    if (
+      (this.text[0] === '"' || this.text[0] === '"') &&
+      this.text[this.text.length - 1] === this.text[0]
+    ) {
+      return this.text.substr(1, this.text.length - 2) as any as T;
+    }
+    if (isNaN(+this.text)) {
+      return this.text as any as T;
+    }
+    const number = parseFloat(this.text);
+    if (!Number.isNaN(number)) {
+      return number as any as T;
+    }
+    return this.text as any as T;
   }
 }

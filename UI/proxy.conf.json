@@ -1,0 +1,7 @@
+{
+  "/pz6irm4l4g.execute-api.eu-west-2.amazonaws.com/*": {
+      "target": "okku",
+      "secure": false,
+      "logLevel": "debug"
+  }
+}
