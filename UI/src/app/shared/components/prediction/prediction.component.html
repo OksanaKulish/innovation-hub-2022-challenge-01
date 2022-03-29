@@ -1,5 +1,7 @@
-<mat-card>
-  <mat-card-title> Data configuration </mat-card-title>
+<mat-card class="mat-elevation-z3 input-card">
+  <mat-card-title>
+    <h2>Data configuration</h2>
+  </mat-card-title>
   <mat-card-content>
     <section class="input-section">
       <form [formGroup]="form" (ngSubmit)="onPredict()" method="POST">
@@ -43,27 +45,40 @@
           <mat-label> Origin </mat-label>
           <input matInput type="number" formControlName="Origin" />
         </mat-form-field>
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          [disabled]="!form.valid"
-        >
-          Predict
-        </button>
-        <button mat-raised-button type="button" (click)="onResetPrediction()">
-          Reset
-        </button>
+        <mat-card-actions class="button-align--right" align="end">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!form.valid"
+            id="predict-button"
+          >
+            Predict
+          </button>
+          <button
+            mat-raised-button
+            type="button"
+            id="reset-button"
+            (click)="onResetPrediction()"
+          >
+            <mat-icon> autorenew </mat-icon>
+            Reset
+          </button>
+        </mat-card-actions>
       </form>
     </section>
   </mat-card-content>
 </mat-card>
 
-<mat-card class="example-result-card">
-  <mat-card-content>
-    <h2>Predicted Result</h2>
-    <br />
-    <br />
-  </mat-card-content>
-  <p>{{ predictedValue }}</p>
-</mat-card>
+<ng-container *ngTemplateOutlet="predictedResult"> </ng-container>
+
+<ng-template #predictedResult>
+  <mat-card class="mat-elevation-z3 predicted-card">
+    <mat-card-content>
+      <h2>Predicted Result</h2>
+      <br />
+      <br />
+    </mat-card-content>
+    <h2>{{ predictedValue ?? "0" }}</h2>
+  </mat-card>
+</ng-template>

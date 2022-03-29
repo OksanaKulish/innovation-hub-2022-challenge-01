@@ -9,7 +9,7 @@ export class PredictService extends WebApiBaseService {
     super(http);
   }
 
-  public async getValueAsync(data: InputDataDto): Promise<InputDataDto> {
-    return await this.postAsync<InputDataDto>(`getValue`, data);
+  public async getValueAsync(data: InputDataDto): Promise<string> {
+    return await this.postAsync<string>(`getValue`, data);
   }
 }
