@@ -10,13 +10,13 @@ import { PredictService } from 'src/app/web-api/services/predict.service';
 })
 export class PredictionComponent implements OnInit {
   public form = new FormGroup({
-    Cylinders: new FormControl('', Validators.required),
-    Displacement: new FormControl('', Validators.required),
-    Horsepower: new FormControl('', Validators.required),
-    Weight: new FormControl('', Validators.required),
-    Acceleration: new FormControl('', Validators.required),
-    'Model year': new FormControl('', Validators.required),
-    Origin: new FormControl('', Validators.required),
+    Cylinders: new FormControl('8', Validators.required),
+    Displacement: new FormControl('307', Validators.required),
+    Horsepower: new FormControl('130', Validators.required),
+    Weight: new FormControl('3504', Validators.required),
+    Acceleration: new FormControl('12', Validators.required),
+    'Model year': new FormControl('70', Validators.required),
+    Origin: new FormControl('1', Validators.required),
   });
 
   public predictedValue: string | undefined;
