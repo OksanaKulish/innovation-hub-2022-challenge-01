@@ -51,9 +51,27 @@ def predict(data):
     return results
 
 @cross_origin()
-@app.route('/getValue', methods=['GET', 'POST'])
-def getValue():
+@app.route('/getValue', methods=['POST'])
+def getValuePost():
     dataset = data_prep(request.json)
+    results = predict(dataset)
+    print(results)
+
+    data = {
+        "predicted_label " : str(results[0])
+    }
+
+    print(data)
+    return (
+        json.dumps(data),
+        200,
+        {'Content-Type': 'application/json'}
+    )
+
+@cross_origin()
+@app.route('/getValue', methods=['GET'])
+def getValue():
+    dataset = data_prep(request.args)
     results = predict(dataset)
     print(results)
 
