@@ -30,7 +30,12 @@ def data_prep(event):
     # check lengths of variables
     # TODO: change when the format of multirows json will be known
     value_length = 1
+    if isinstance(event, list):
+        event = dict(event)
     data = pd.DataFrame(event, index=list(range(value_length)))
+
+    # check columns order
+    data = data[COLUMNS_ORDER]
 
     # catch exception if data can't be changed into numbers
     try:
@@ -49,7 +54,7 @@ def data_prep(event):
 def predict(data):
     """
     :param data: numpy array with input values
-    :return: results as 1D numpy array 
+    :return: results as 1D numpy array
     """
     results = model.predict(data).flatten()
     return results
@@ -73,16 +78,19 @@ def lambda_handler(event, context):
 
 
 # if __name__ == "__main__":
-#     event = {
-#         "Cylinders": "8",
-#         "Displacement": "307",
-#         "Horsepower": "130",
-#         "Weight": "3504",
-#         "Acceleration": "12",
-#         "Model year": "70",
-#         "Origin": "1"
-#     }
+#     event = [('Acceleration', '12'), ('Cylinders', '8'), ('Displacement', '307'), ('Horsepower', '130'), ('Model year', '70'),
+#              ('Origin', '1'), ('Weight', '3504')]
 #
-#     lambda_handler(event, context="")
-#
-#     print()
+    # event = {
+    #     "Cylinders": "8",
+    #     "Displacement": "307",
+    #     "Horsepower": "130",
+    #     "Weight": "3504",
+    #     "Acceleration": "12",
+    #     "Model year": "70",
+    #     "Origin": "1"
+    # }
+    #
+    # lambda_handler(event, context="")
+    #
+    # print()
