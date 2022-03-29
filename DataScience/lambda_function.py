@@ -8,13 +8,16 @@ from io import BytesIO
 
 import pandas as pd
 from keras.models import load_model
+import logging
 
 from constants import *
 from utils.cat_columns_encoder import transform_cat_columns, replace_categorical_column
 
-# TODO: add reading data from json
-# TODO: add logging
 # TODO: add exceptions for use cases
+
+# add logs to CloudWatch
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 model = load_model(MODEL_PATH)
 
@@ -34,6 +37,7 @@ def data_prep(event):
         data = data.astype(float)
     except Exception as error:
         print(str(error))
+        logger.error(str(error))
 
     cat_column = data["Origin"].values
     encoded_columns = transform_cat_columns(cat_column)
@@ -43,13 +47,19 @@ def data_prep(event):
 
 
 def predict(data):
+    """
+    :param data: numpy array with input values
+    :return: results as 1D numpy array 
+    """
     results = model.predict(data).flatten()
     return results
 
 
 def lambda_handler(event, context):
     dataset = data_prep(event)
+    logger.info("data was read and prepared for the model")
     results = predict(dataset)
+    logger.info("successful prediction step")
     print(results)
 
     return {
