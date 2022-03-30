@@ -9,7 +9,9 @@ export class PredictService extends WebApiBaseService {
     super(http);
   }
 
-  public async getValueAsync(): Promise<string> {
-    return await this.getAsync(`getValue?Cylinders=8&Displacement=307&Horsepower=130&Weight=3504&Acceleration=12&Model+year=70&Origin=1`);
+  public async getValueAsync(data: InputDataDto): Promise<string> {
+      return await this.getAsync(
+        `getValue?Cylinders=${data.Cylinders}&Displacement=${data.Displacement}&Horsepower=${data.Cylinders}&Weight=${data.Weight}&Acceleration=${data.Acceleration}&Model+year=${data['Model year']}&Origin=${data.Origin}`
+      );
   }
 }

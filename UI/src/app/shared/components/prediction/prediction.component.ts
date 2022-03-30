@@ -6,9 +6,11 @@ import { PredictService } from 'src/app/web-api/services/predict.service';
 @Component({
   selector: 'app-prediction',
   templateUrl: './prediction.component.html',
-  styleUrls: ['./prediction.component.scss', '../../../../assets/material-custom.scss'],
+  styleUrls: [
+    './prediction.component.scss',
+    '../../../../assets/material-custom.scss',
+  ],
 })
-
 export class PredictionComponent implements OnInit {
   public form = new FormGroup({
     Cylinders: new FormControl('8', Validators.required),
@@ -33,7 +35,7 @@ export class PredictionComponent implements OnInit {
 
   public onPredict() {
     if (this.form.valid) {
-      this.predictService.getValueAsync().then((res) => {
+      this.predictService.getValueAsync(this.form.value).then((res) => {
         this.predictedValue = Object.values(res);
       });
     }
