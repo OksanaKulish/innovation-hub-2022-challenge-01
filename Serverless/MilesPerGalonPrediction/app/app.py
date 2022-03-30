@@ -13,14 +13,21 @@ from constants import *
 from cat_columns_encoder import transform_cat_columns, replace_categorical_column
 import json
 from flask_lambda import FlaskLambda
-from flask import request
-from flask_cors import CORS, cross_origin
+from flask import request, Flask
+try:
+    from flask_cors import CORS  # The typical way to import flask-cors
+except ImportError:
+    # Path hack allows examples to be run without installation.
+    import os
+    parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    os.sys.path.insert(0, parentdir)
+
+    from flask_cors import CORS
 
 model = load_model(MODEL_PATH)
 
 app = FlaskLambda(__name__)
 cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 def data_prep(event):
@@ -53,7 +60,6 @@ def predict(data):
     results = model.predict(data).flatten()
     return results
 
-@cross_origin()
 @app.route('/getValue', methods=['POST'])
 def getValuePost():
     dataset = data_prep(request.json)
@@ -71,7 +77,6 @@ def getValuePost():
         {'Content-Type': 'application/json'}
     )
 
-@cross_origin()
 @app.route('/getValue', methods=['GET'])
 def getValue():
     dataset = data_prep(request.args)
@@ -89,10 +94,12 @@ def getValue():
         {'Content-Type': 'application/json'}
     )
 
-@cross_origin()
 @app.route('/ping', methods=['GET', 'POST'])
 def ping():
     return {
         'statusCode': 200,
         'body': 'ping is ok'
     }
+
+#if __name__ == "__main__":
+#    app.run(debug=True)
