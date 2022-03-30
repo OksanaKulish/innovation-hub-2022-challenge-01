@@ -3,8 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PredictionComponent } from './shared/components/prediction/prediction.component';
 
 const routes: Routes = [
-  { path: 'prediction', component: PredictionComponent },
-  { path: '', redirectTo: '/prediction', pathMatch: 'full' },
+  { path: '', component: PredictionComponent }
 ];
 
 @NgModule({
