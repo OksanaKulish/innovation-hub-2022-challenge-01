@@ -94,6 +94,13 @@ def getValue():
         {'Content-Type': 'application/json'}
     )
 
+@app.route('/getBulkValues', methods=['GET'])
+def getValue():
+    return {
+        args: request.args
+        method: 'ok'
+    }
+
 @app.route('/ping', methods=['GET', 'POST'])
 def ping():
     return {
