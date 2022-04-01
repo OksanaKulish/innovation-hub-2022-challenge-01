@@ -95,7 +95,7 @@ def getValue():
     )
 
 @app.route('/getBulkValues', methods=['GET'])
-def getValue():
+def getBulkValue():
     return {
         'args': request.args['url'],
         'method': 'ok'
