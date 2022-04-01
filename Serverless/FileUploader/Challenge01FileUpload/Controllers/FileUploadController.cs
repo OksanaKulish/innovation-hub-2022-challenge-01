@@ -16,9 +16,14 @@ namespace Challenge01FileUpload.Controllers
         [HttpPost()]
         public string Post()
         {
-            IFormFile file = Request.Form.Files.FirstOrDefault();
+            if (Request.HasFormContentType && Request.Form != null && Request.Form.Count() > 0)
+            {
+                IFormFile file = Request.Form.Files.FirstOrDefault();
 
-            return $"Received file {file.FileName} with size in bytes {file.Length}";
+                return $"Received file {file.FileName} with size in bytes {file.Length}";
+            }
+
+            return "no form content";
         }
     }
 }
