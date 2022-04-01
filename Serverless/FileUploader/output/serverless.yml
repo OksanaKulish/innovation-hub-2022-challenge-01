@@ -25,6 +25,10 @@ provider:
           Action: 
             - dynamodb:*
           Resource: 'arn:aws:dynamodb:eu-west-1:*:*'
+        - Effect: Allow
+          Action: 
+            - s3:*
+          Resource: 'arn:aws:s3:::angular-simple-ui/*'
  
 functions:
   challenge01-fileUpload:

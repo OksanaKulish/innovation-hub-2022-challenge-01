@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Amazon.S3;
+using Amazon.S3.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
 using System.Linq;
 
 namespace Challenge01FileUpload.Controllers
@@ -14,7 +18,7 @@ namespace Challenge01FileUpload.Controllers
         }
 
         [HttpPost()]
-        public string Post()
+        public object Post()
         {
             if (Request == null)
             {
@@ -38,7 +42,23 @@ namespace Challenge01FileUpload.Controllers
                 return "No files";
             }
 
-            return $"Received file {file.FileName} with size in bytes {file.Length}";
+            StreamReader reader = new StreamReader(file.OpenReadStream());
+
+            var id = Guid.NewGuid().ToString();
+
+            var content = reader.ReadToEnd();
+            AmazonS3Client client = new AmazonS3Client();
+            var result = client.PutObjectAsync(new PutObjectRequest
+            {
+                BucketName = "angular-simple-ui",
+                Key = $"csvfiles/{id}",
+                ContentBody = content
+            }).Result;
+
+            return new
+            {
+                url = $"https://angular-simple-ui.s3.eu-west-2.amazonaws.com/csvfiles/{id}"
+            };
         }
     }
 }
