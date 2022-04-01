@@ -7,6 +7,9 @@ provider:
   name: aws
   runtime: dotnetcore3.1
   region: eu-west-2
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
   iam:
     role:
       statements: 
