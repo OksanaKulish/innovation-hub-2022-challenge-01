@@ -97,8 +97,8 @@ def getValue():
 @app.route('/getBulkValues', methods=['GET'])
 def getValue():
     return {
-        args: request.args
-        method: 'ok'
+        'args': request.args['url'],
+        'method': 'ok'
     }
 
 @app.route('/ping', methods=['GET', 'POST'])
