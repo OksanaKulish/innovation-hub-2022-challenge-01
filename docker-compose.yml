@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  frontend:
+    container_name: challenge01-ui
+    build: ./UI
+    command: npm run start
+    ports:
+      - "3000:52333"
+    stdin_open: true
+    tty: true
+
+#  serverless:
+#    container_name: challenge01-serverless
+#    build: ./Serverless/MilesPerGalonPrediction/app
+#    ports:
+#      - "3001:8080"
