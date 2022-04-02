@@ -11,6 +11,9 @@ mat-icon {
   color: #898484;
   margin-left: 10px;
 }
+.sub-title::selection {
+background-color: #232f3e;
+}
 
 mat-toolbar {
   background-color: #232f3e;

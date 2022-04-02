@@ -10,9 +10,19 @@ import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './layout/header/header.component';
 import { PredictionComponent } from './shared/components/prediction/prediction.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { LoadingBarComponent } from './shared/components/loading-bar/loading-bar.component';
+import { YearPickerComponent } from './shared/components/year-picker/year-picker.component';
 
 @NgModule({
-  declarations: [AppComponent, PredictionComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    PredictionComponent,
+    HeaderComponent,
+    FooterComponent,
+    LoadingBarComponent,
+    YearPickerComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,7 +32,7 @@ import { PredictionComponent } from './shared/components/prediction/prediction.c
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [HttpClient, PredictService],
+  providers: [HttpClient, PredictService, YearPickerComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

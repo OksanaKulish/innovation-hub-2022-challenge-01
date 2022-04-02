@@ -39,3 +39,20 @@
   background-color: #232f3e;
   color: white;
 }
+
+.card-container {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  margin-bottom:0;
+  padding-bottom:90px;
+}
+
+::ng-deep .mat-form-field {
+  max-width: 180px !important;
+  margin-left: 10px;
+}
+
