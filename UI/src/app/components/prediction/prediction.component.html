@@ -2,10 +2,16 @@
   <mat-card class="mat-elevation-z3 input-card">
     <mat-card-title class="card-container">
       <div class="action__left">
-        <h2 class="sub-title"> Data configuration </h2>
+        <h2 class="sub-title">Data configuration</h2>
         <app-tooltip></app-tooltip>
       </div>
-      <button class="card-button--right" mat-stroked-button>
+      <button class="card__button--right" mat-stroked-button>
+        <mat-icon
+          class="icon-upload"
+          matTooltip="Browse csv file to set input data."
+        >
+          save_alt
+        </mat-icon>
         Import a CSV file
       </button>
     </mat-card-title>

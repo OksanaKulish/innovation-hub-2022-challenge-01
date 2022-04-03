@@ -68,10 +68,9 @@ export class PredictionComponent implements OnInit {
   }
 
   public isCtrlValid(ctrl: string) {
-    let isValid = (
+    let isValid =
       this.form.controls[ctrl].invalid &&
-      (this.form.controls[ctrl].dirty || this.form.controls[ctrl].touched)
-    );
+      (this.form.controls[ctrl].dirty || this.form.controls[ctrl].touched);
 
     return [ctrl, isValid] as const;
   }

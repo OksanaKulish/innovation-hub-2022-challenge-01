@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/components/shared.module';
 import { PredictionComponent } from './prediction/prediction.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const SHARED_DECLARATIVES = [
   PredictionComponent

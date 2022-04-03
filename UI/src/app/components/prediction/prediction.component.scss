@@ -47,6 +47,7 @@
 }
 
 .container {
+  background-color: ghostwhite;
   margin-bottom:0;
   padding-bottom:90px;
 }
@@ -63,5 +64,12 @@
   .sub-title {
     margin: 0;
     padding-right: 5px;
+  }
+}
+
+
+.card__button--right {
+  .icon-upload {
+    font-size: large;
   }
 }
