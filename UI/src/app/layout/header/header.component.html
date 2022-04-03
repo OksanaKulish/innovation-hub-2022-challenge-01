@@ -3,6 +3,10 @@
   <h2>INNOVATION HUB 2022 CHALLENGE 01</h2>
 </mat-toolbar>
 
-<mat-toolbar-row>
+<mat-toolbar-row *ngIf="isShow">
   <h4 class="sub-title">Serverless/Kubernetes architecture to support a data sciences workload exposed via API to a front-end application</h4>
+
+  <button mat-icon-button (click)="onClose()">
+    <mat-icon matTooltip="Close description.">close</mat-icon>
+  </button>
 </mat-toolbar-row>
