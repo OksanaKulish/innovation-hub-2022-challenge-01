@@ -1,1 +1,18 @@
-<p>upload-scv works!</p>
+<button
+  class="card__button--right"
+  mat-stroked-button
+  (click)="fileUpload.click()"
+>
+  <mat-icon class="icon-upload" matTooltip="Browse csv file to set input data.">
+    save_alt
+  </mat-icon>
+  Import a CSV file
+</button>
+
+<input
+  #fileUpload
+  type="file"
+  class="file-upload"
+  [ngClass]="{ 'valid-file': fileName, 'invalid-file': !fileName }"
+  (change)="onUploadCSV($event)"
+/>
