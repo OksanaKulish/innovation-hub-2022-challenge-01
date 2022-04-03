@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PredictService } from 'src/app/web-api/services/predict.service';
-import { YearPickerComponent } from '../year-picker/year-picker.component';
+import { YearPickerComponent } from '../../shared/components/year-picker/year-picker.component';
 
 @Component({
   selector: 'app-prediction',
   templateUrl: './prediction.component.html',
   styleUrls: [
     './prediction.component.scss',
-    '../../../../assets/material-custom.scss',
+    '../../../assets/material-custom.scss',
   ],
 })
 export class PredictionComponent implements OnInit {
@@ -43,7 +43,7 @@ export class PredictionComponent implements OnInit {
   }
 
   public onPredict() {
-    this.dataPicker.writeValue(this._yearPickerCtrl.value);
+    // this.dataPicker.writeValue(this._yearPickerCtrl.value);
     this.form.controls['Model year'].setValue(
       this._yearPickerCtrl.value.getFullYear()
     );

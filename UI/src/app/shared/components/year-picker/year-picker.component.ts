@@ -22,9 +22,9 @@ export const YEAR_MODE_FORMATS = {
   },
   display: {
     dateInput: 'YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
+    // monthYearLabel: 'MMM YYYY',
+    // dateA11yLabel: 'LL',
+    // monthYearA11yLabel: 'MMMM YYYY',
   },
 };
 
@@ -100,7 +100,7 @@ export class YearPickerComponent implements ControlValueAccessor {
       const momentDate = moment(date);
       if (momentDate.isValid()) {
         momentDate.set({ date: 1 });
-        this._inputCtrl.setValue(moment(date), { emitEvent: false });
+        this._inputCtrl.setValue(moment(date));
       }
     }
   }

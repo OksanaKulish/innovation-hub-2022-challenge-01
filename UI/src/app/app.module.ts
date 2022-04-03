@@ -8,20 +8,14 @@ import { PredictService } from './web-api/services/predict.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HeaderComponent } from './layout/header/header.component';
-import { PredictionComponent } from './shared/components/prediction/prediction.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { LoadingBarComponent } from './shared/components/loading-bar/loading-bar.component';
 import { YearPickerComponent } from './shared/components/year-picker/year-picker.component';
+import { SharedModule } from './shared/components/shared.module';
+import { LayoutModule } from './layout/layout.module';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PredictionComponent,
-    HeaderComponent,
-    FooterComponent,
-    LoadingBarComponent,
-    YearPickerComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +25,9 @@ import { YearPickerComponent } from './shared/components/year-picker/year-picker
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
+    LayoutModule,
+    ComponentsModule
   ],
   providers: [HttpClient, PredictService, YearPickerComponent],
   bootstrap: [AppComponent],
