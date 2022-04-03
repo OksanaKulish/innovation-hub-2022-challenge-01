@@ -8,13 +8,14 @@ mat-icon {
 }
 
 .sub-title {
-  color: #898484;
+  color: white;
   margin-left: 10px;
-}
-.sub-title::selection {
-background-color: #232f3e;
 }
 
 mat-toolbar {
   background-color: #232f3e;
+}
+
+mat-toolbar-row {
+  background-color: darkslategray;
 }
