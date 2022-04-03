@@ -42,16 +42,16 @@ export class PredictionComponent implements OnInit {
     this.form.addControl('Model year', this._yearPickerCtrl);
   }
 
-  public onPredict() {
-    // this.dataPicker.writeValue(this._yearPickerCtrl.value);
+  public async onPredict() {
+    this.isLoading = true;
+    this.dataPicker.writeValue(this._yearPickerCtrl.value);
     this.form.controls['Model year'].setValue(
       this._yearPickerCtrl.value.getFullYear()
     );
 
     if (this.form.valid) {
-      this.isLoading = true;
       try {
-        this.predictService.getValueAsync(this.form.value).then((res) => {
+        await this.predictService.getValueAsync(this.form.value).then((res) => {
           this.predictedValue = Object.values(res);
         });
       } catch (error: any) {
@@ -65,5 +65,14 @@ export class PredictionComponent implements OnInit {
   public onResetPrediction() {
     this.form.reset();
     this._yearPickerCtrl.setValue(null);
+  }
+
+  public isCtrlValid(ctrl: string) {
+    let isValid = (
+      this.form.controls[ctrl].invalid &&
+      (this.form.controls[ctrl].dirty || this.form.controls[ctrl].touched)
+    );
+
+    return [ctrl, isValid] as const;
   }
 }
