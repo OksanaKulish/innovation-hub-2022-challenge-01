@@ -55,3 +55,13 @@
   max-width: 180px !important;
   margin-left: 10px;
 }
+
+.action__left {
+  display: flex;
+  align-items: center;
+
+  .sub-title {
+    margin: 0;
+    padding-right: 5px;
+  }
+}

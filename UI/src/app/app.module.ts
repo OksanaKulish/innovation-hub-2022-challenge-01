@@ -1,4 +1,8 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -12,11 +16,10 @@ import { YearPickerComponent } from './shared/components/year-picker/year-picker
 import { SharedModule } from './shared/components/shared.module';
 import { LayoutModule } from './layout/layout.module';
 import { ComponentsModule } from './components/components.module';
+import { ErrorInterceptor } from './web-api/interceptors/error-response.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,9 +30,18 @@ import { ComponentsModule } from './components/components.module';
     ReactiveFormsModule,
     SharedModule,
     LayoutModule,
-    ComponentsModule
+    ComponentsModule,
   ],
-  providers: [HttpClient, PredictService, YearPickerComponent],
+  providers: [
+    HttpClient,
+    PredictService,
+    YearPickerComponent,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
