@@ -1,5 +1,8 @@
 <div *ngIf="isUploadedFile; then gridCSV; else browseCSV"></div>
 
+<!-- <ng-container *ngTemplateOutlet="browseCSV"> </ng-container> -->
+
+<!-- <ng-container *ngTemplateOutlet="gridCSV"> </ng-container> -->
 <ng-template #browseCSV>
   <app-upload-scv #uploadSCV>
     <ng-container *ngTemplateOutlet="gridCSV"> </ng-container>

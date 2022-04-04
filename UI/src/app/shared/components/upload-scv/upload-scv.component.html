@@ -1,26 +1,29 @@
 <div class="container">
   <div>
-  <button
-    class="card__button--right"
-    mat-stroked-button
-    (click)="fileUpload.click()"
-  >
-    <mat-icon
-      class="icon-upload"
-      matTooltip="Browse csv file to set input data."
+    <button
+      class="card__button--right"
+      mat-stroked-button
+      (click)="fileUpload.click()"
     >
-      save_alt
-    </mat-icon>
-    Import a CSV file
-  </button>
+      <mat-icon
+        class="icon-upload"
+        matTooltip="Browse csv file to set input data."
+      >
+        save_alt
+      </mat-icon>
+      Import a CSV file
+    </button>
 
-  <input
-    #fileUpload
-    type="file"
-    accept=".csv"
-    class="file-upload"
-    [ngClass]="{ 'valid-file': fileName, 'invalid-file': fileName == null }"
-    (change)="onUploadCSV($event)"
-  />
-  <div>
+    <input
+      #fileUpload
+      type="file"
+      accept=".csv"
+      class="file-upload"
+      [ngClass]="{ 'valid-file': fileName, 'invalid-file': fileName == null }"
+      (change)="onUploadCSV($event)"
+    />
+    <div></div>
+  </div>
+
+  <pre>{{ details ?? 'File is not uploded' | json }}</pre>
 </div>

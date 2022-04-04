@@ -16,7 +16,7 @@ export class PredictionComponent implements OnInit {
   public isLoading: boolean = false;
   public label = 'Choose a Year';
   public predictedValue: string[] | undefined;
-  public minDate = 2020;
+  public minDate = 988;
 
   public form = new FormGroup({
     Cylinders: new FormControl(8, Validators.required),
