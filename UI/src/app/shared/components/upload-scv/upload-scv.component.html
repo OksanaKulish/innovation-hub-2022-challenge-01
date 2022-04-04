@@ -12,7 +12,8 @@
 <input
   #fileUpload
   type="file"
+  accept=".csv"
   class="file-upload"
-  [ngClass]="{ 'valid-file': fileName, 'invalid-file': !fileName }"
+  [ngClass]="{ 'valid-file': fileName, 'invalid-file': fileName==null }"
   (change)="onUploadCSV($event)"
 />
