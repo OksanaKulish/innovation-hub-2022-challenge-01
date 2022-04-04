@@ -1,0 +1,64 @@
+<div *ngIf="isUploadedFile; then gridCSV; else browseCSV"></div>
+
+<ng-template #browseCSV>
+  <app-upload-scv #uploadSCV>
+    <ng-container *ngTemplateOutlet="gridCSV"> </ng-container>
+  </app-upload-scv>
+</ng-template>
+
+<ng-template #gridCSV>
+  <mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Cylinders Column -->
+    <ng-container matColumnDef="cylinders">
+      <mat-header-cell *matHeaderCellDef> Cylinders </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.cylinders }} </mat-cell>
+    </ng-container>
+
+    <!-- Displacement Column -->
+    <ng-container matColumnDef="displacement">
+      <mat-header-cell *matHeaderCellDef> Displacement </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.displacement }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Horsepower Column -->
+    <ng-container matColumnDef="horsepower">
+      <mat-header-cell *matHeaderCellDef> Horsepower </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.horsepower }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.weight }} </mat-cell>
+    </ng-container>
+
+    <!-- Acceleration Column -->
+    <ng-container matColumnDef="acceleration">
+      <mat-header-cell *matHeaderCellDef> Acceleration </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.acceleration }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Model Year Column -->
+    <ng-container matColumnDef="model_year">
+      <mat-header-cell *matHeaderCellDef> Model Year </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.model_year }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Origin Column -->
+    <ng-container matColumnDef="origin">
+      <mat-header-cell *matHeaderCellDef> Origin </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.origin }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</ng-template>

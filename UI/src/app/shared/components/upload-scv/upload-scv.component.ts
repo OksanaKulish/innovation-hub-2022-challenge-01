@@ -20,8 +20,8 @@ export class UploadScvComponent implements OnInit {
     if (file) {
       this.fileName = file.name;
       const formData = new FormData();
-      formData.append('thumbnail', file);
-      const upload$ = this.http.post('/api/thumbnail-upload', formData);
+      formData.append('csv', file);
+      const upload$ = this.http.post('/api/csv-upload', formData);
       upload$.subscribe();
     }
   }

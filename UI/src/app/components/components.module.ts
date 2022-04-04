@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/components/shared.module';
 import { PredictionComponent } from './prediction/prediction.component';
+import { PredictionGridComponent } from './prediction-grid/prediction-grid.component';
 
 const SHARED_DECLARATIVES = [
   PredictionComponent
@@ -23,7 +24,8 @@ const SHARED_DECLARATIVES = [
       SHARED_DECLARATIVES
     ],
     declarations: [
-      SHARED_DECLARATIVES
+      SHARED_DECLARATIVES,
+      PredictionGridComponent
     ]
 })
 export class ComponentsModule { }

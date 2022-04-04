@@ -32,7 +32,7 @@
 }
 
 .button-align--right {
-  margin-right: 3%;
+  margin-right: 1%;
 }
 
 .button--blue {
@@ -42,14 +42,15 @@
 
 .card-container {
   padding: 10px;
+  padding-right: 6%;
   display: flex;
   justify-content: space-between;
 }
 
 .container {
   background-color: ghostwhite;
-  margin-bottom:0;
-  padding-bottom:90px;
+  margin-bottom: 0%;
+  // padding-bottom: 10%;
 }
 
 ::ng-deep .mat-form-field {
