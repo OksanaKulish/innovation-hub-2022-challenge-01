@@ -73,6 +73,7 @@ def data_prep(event):
 
 def predict(data):
     results = model.predict(data).flatten()
+    results = results.astype(str)
     return results
 
 @app.route('/getValue', methods=['POST'])
