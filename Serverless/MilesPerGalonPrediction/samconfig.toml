@@ -2,9 +2,9 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "test13"
+stack_name = "MilesPerGalonPrediction"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-o362aq1hc4oy"
-s3_prefix = "test13"
+s3_prefix = "MilesPerGalonPrediction"
 region = "eu-west-2"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
