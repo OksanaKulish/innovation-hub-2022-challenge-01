@@ -7,6 +7,7 @@ from PIL import Image
 from io import BytesIO
 
 import pandas as pd
+import logging
 from keras.models import load_model
 
 from constants import *
@@ -24,6 +25,10 @@ except ImportError:
 
     from flask_cors import CORS
 
+# add logs to CloudWatch
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
 model = load_model(MODEL_PATH)
 
 app = FlaskLambda(__name__)
@@ -32,26 +37,36 @@ cors = CORS(app)
 
 def data_prep(event):
     """
-    :param event: dict into json format of the input values
+    :param event: dict, or json, or url to the input values
     :return: numpy array with prepared data to model input
     """
-    # check lengths of variables
-    # TODO: change when the format of multirows json will be known
-    value_length = 1
-    data = pd.DataFrame(event, index=list(range(value_length)))
+    if isinstance(event, str):  # if event is url (multiple values sets)
+        data = pd.read_csv(event)
+    else:  # if event is json or dict (single values set)
+        value_length = 1
+        data = pd.DataFrame(event, index=list(range(value_length)))
+
+    if data.isna().any().any():
+        error = "Empty values are met in data. Fill empty values"
+        print(error)
+        logger.error(error)
 
     # check columns order
+    data.columns = data.columns.str.lower()
     data = data[COLUMNS_ORDER]
 
     # catch exception if data can't be changed into numbers
     try:
         data = data.astype(float)
     except Exception as error:
-        print(str(error))
+        error = str(error)
+        print(error)
+        logger.error(error)
 
-    cat_column = data["Origin"].values
+    # categorical column to one-hot-encoding
+    cat_column = data["origin"].values
     encoded_columns = transform_cat_columns(cat_column)
-    data = replace_categorical_column(data, "Origin", encoded_columns)
+    data = replace_categorical_column(data, "origin", encoded_columns)
 
     return data.values
 
@@ -63,7 +78,9 @@ def predict(data):
 @app.route('/getValue', methods=['POST'])
 def getValuePost():
     dataset = data_prep(request.json)
+    logger.info("data was read and prepared for the model")
     results = predict(dataset)
+    logger.info("successful prediction step")
     print(results)
 
     data = {
@@ -80,7 +97,9 @@ def getValuePost():
 @app.route('/getValue', methods=['GET'])
 def getValue():
     dataset = data_prep(request.args)
+    logger.info("data was read and prepared for the model")
     results = predict(dataset)
+    logger.info("successful prediction step")
     print(results)
 
     data = {
@@ -96,6 +115,15 @@ def getValue():
 
 @app.route('/getBulkValues', methods=['GET'])
 def getBulkValue():
+    dataset = data_prep(request.args['url'])
+    logger.info("data was read and prepared for the model")
+    results = predict(dataset)
+    logger.info("successful prediction step")
+    print(results)
+
+    data = {
+        "predicted_label" : str(results[0])
+    }
     return {
         'args': request.args['url'],
         'method': 'ok'
