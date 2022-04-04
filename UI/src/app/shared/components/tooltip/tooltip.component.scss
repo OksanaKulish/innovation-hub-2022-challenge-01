@@ -1,0 +1,9 @@
+.tooltip-icon {
+  color: blue;
+  padding-left: 4px;
+  font-size: 16px;
+
+  &.icon-information:before{
+      vertical-align: -3px;
+  }
+}
