@@ -1,5 +1,4 @@
 .card__button--right {
-  background-color: goldenrod;
   .icon-upload {
     font-size: large;
   }
@@ -25,7 +24,10 @@
 
 .container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 10%;
+  align-items: baseline;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: flex-end;
+  padding-left: 15%;
+  padding-top: 15%;
 }

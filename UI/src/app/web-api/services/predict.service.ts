@@ -14,4 +14,10 @@ export class PredictService extends WebApiBaseService {
       `getValue?Cylinders=${data.Cylinders}&Displacement=${data.Displacement}&Horsepower=${data.Horsepower}&Weight=${data.Weight}&Acceleration=${data.Acceleration}&Model+year=${data['Model year']}&Origin=${data.Origin}`
     );
   }
+
+  public async getBulkValuesAsync(data: any): Promise<string> {
+    return await this.getAsync(
+      `getBulkValues?url=${data.url}`
+    );
+  }
 }
