@@ -29,6 +29,6 @@ export class PredictService extends WebApiBaseService {
   }
 
   public getUrl(data: string) {
-    return this.http.get(data);
+    return this.http.get<string>(`${data}`);
   }
 }

@@ -5,6 +5,7 @@
 .mpg-table {
   max-width: max-content;
 }
+
 .csv-table {
   width: -webkit-fill-available;
 }
@@ -20,6 +21,7 @@
   .right {
     float: right;
     width: 80%;
+    height: 67vh;
     display: flex;
     flex-direction: row;
   }
@@ -32,12 +34,18 @@ mat-toolbar-row {
   color: rgba(0, 0, 0, 0.87);
 }
 
+.loading__center{
+  margin-top: 20%;
+  position: absolute;
+  margin-left: 40%
+}
+
 mat-card {
   padding: 0;
 }
 
 // .mat-column-MPG {
-//   width: 32px;
+//   min-width: max-content;
 //   border-right: 1px solid currentColor;
 //   padding-right: 24px;
 //   text-align: center;
@@ -50,11 +58,11 @@ mat-card {
 .no__date {
   text-align: center;
   padding-top: 15%;
+  padding-left: 30%;
+  font-size: medium;
 }
 
-
-
-/**/
+/*Should be moved to upload-scv */
 .card__button--right {
   .icon-upload {
     font-size: large;
@@ -66,7 +74,7 @@ mat-card {
 }
 
 .file-upload {
-  padding-top: 2%;
+  padding-top: 5%;
   padding-left: 10%;
   font-weight: bold;
 }

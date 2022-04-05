@@ -1,4 +1,3 @@
-<!-- <div *ngIf="isUploadedFile; then gridCSV; else browseCSV"></div> -->
 <div class="wrap">
   <mat-card class="left">
     <mat-toolbar-row class="mat-elevation-z1">
@@ -7,9 +6,15 @@
     <ng-container *ngTemplateOutlet="browseCSV"> </ng-container>
   </mat-card>
   <mat-card class="right">
-    <!-- <div class="no__date">Browse file to preview date.</div> -->
-    <ng-container *ngTemplateOutlet="gridMGP"> </ng-container>
-    <ng-container *ngTemplateOutlet="gridCSV"> </ng-container>
+    <div *ngIf="dataSource; then grid; else noData"></div>
+    <mat-spinner class="loading__center" *ngIf="isLoading"></mat-spinner>
+    <ng-template #grid>
+      <ng-container *ngTemplateOutlet="gridMGP"> </ng-container>
+      <ng-container *ngTemplateOutlet="gridCSV"> </ng-container>
+    </ng-template>
+    <ng-template #noData>
+      <div class="no__date">Browse file for data preview and MPG prediction.</div>
+    </ng-template>
   </mat-card>
 </div>
 
@@ -41,12 +46,16 @@
       <div></div>
     </div>
     <!-- <pre>{{ predictedData ?? 'File is not uploded' | json }}</pre> -->
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
+
   </div>
 </ng-template>
 
 <ng-template #gridMGP>
-  <mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z1 mpg-table">
+  <mat-table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z1 mpg-table"
+  >
     <!-- MPG Column -->
     <ng-container matColumnDef="MPG">
       <mat-header-cell *matHeaderCellDef> MPG </mat-header-cell>
@@ -58,9 +67,13 @@
   </mat-table>
 </ng-template>
 
-  <ng-template #gridCSV>
-    <mat-table mat-table [dataSource]="dataSource2" class="mat-elevation-z1 csv-table">
-         <!-- Cylinders Column -->
+<ng-template #gridCSV>
+  <mat-table
+    mat-table
+    [dataSource]="dataSource2"
+    class="mat-elevation-z1 csv-table"
+  >
+    <!-- Cylinders Column -->
     <ng-container matColumnDef="cylinders">
       <mat-header-cell *matHeaderCellDef> Cylinders </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{ element.cylinders }} </mat-cell>

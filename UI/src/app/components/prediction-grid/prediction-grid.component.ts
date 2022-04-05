@@ -50,7 +50,7 @@ export class PredictionGridComponent implements OnInit {
   public fileName = '';
   public predictedData: any;
   public isLoading = false;
-
+  public s: any;
   public async onUploadCSV(event: any) {
     this.isLoading = true;
     const file: File = event.target.files[0];
@@ -62,23 +62,23 @@ export class PredictionGridComponent implements OnInit {
       try {
         await this.predictService
           .getFileUploadAsync(formData)
-          .then(async (result) => {
-            this.predictedData = await this.predictService.getBulkValuesAsync(
-              result
-            );
-            this.predictedData['predicted_label']
-              .forEach((element: any) => {
+          .then(async (result: any) => {
+            if (result) {
+              this.predictedData = await this.predictService.getBulkValuesAsync(
+                result
+              );
+              this.predictService
+                .getUrl(result.url)
+                .subscribe((data) => data);
+
+              this.predictedData['predicted_label'].forEach((element: any) => {
                 this.grid.push({ MPG: element });
-              })
-              // .then((result: string) => {
-              //   this.predictService
-              //     .getUrl(result)
-              //     .subscribe((data) => console.log(data));
-              // });
+              });
+            }
           });
       } finally {
         this.dataSource = new MatTableDataSource(this.grid);
-        console.log(this.grid);
+        // console.log(this.grid);
         this.isLoading = false;
       }
     }
