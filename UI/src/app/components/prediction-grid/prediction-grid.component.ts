@@ -1,33 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { UploadScvComponent } from 'src/app/shared/components/upload-scv/upload-scv.component';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { PredictService } from 'src/app/web-api/services/predict.service';
 
-export interface PeriodicElement {
-  cylinders: number;
+export interface PredictionMPGDto {
   MPG: number;
+}
+
+export interface PredictionCVSDto {
+  cylinders: number;
   weight: number;
   displacement: number;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { MPG: 1, cylinders: 12, weight: 1.0079, displacement: 12 },
-  { MPG: 2, cylinders: 33, weight: 4.0026, displacement: 34 },
-  { MPG: 3, cylinders: 33, weight: 6.941, displacement: 34 },
-  { MPG: 4, cylinders: 33, weight: 9.0122, displacement: 33 },
-  { MPG: 5, cylinders: 13, weight: 10.811, displacement: 5 },
-  { MPG: 6, cylinders: 13, weight: 12.0107, displacement: 5 },
-  { MPG: 7, cylinders: 13, weight: 14.0067, displacement: 55 },
-  { MPG: 8, cylinders: 34, weight: 15.9994, displacement: 55 },
-];
-
 export interface InputDataDto {
-  Cylinders: string;
-  Displacement: string;
-  Horsepower: string;
-  Weight: string;
-  Acceleration: string;
-  'Model year': string;
-  Origin: string;
-  MPG: string;
+  // Cylinders: string;
+  // Displacement: string;
+  // Horsepower: string;
+  // Weight: string;
+  // Acceleration: string;
+  // 'Model year': string;
+  // Origin: string;
+  MPG: number;
 }
 @Component({
   selector: 'app-prediction-grid',
@@ -35,8 +28,8 @@ export interface InputDataDto {
   styleUrls: ['./prediction-grid.component.scss'],
 })
 export class PredictionGridComponent implements OnInit {
-  public displayedColumns: string[] = [
-    'MPG',
+  public displayedColumns: string[] = ['MPG'];
+  public displayedColumns2: string[] = [
     'cylinders',
     'displacement',
     'horsepower',
@@ -45,18 +38,49 @@ export class PredictionGridComponent implements OnInit {
     'model_year',
     'origin',
   ];
-  public dataSource = ELEMENT_DATA;
+  public dataSource: PredictionMPGDto[] | any;
+  public dataSource2: PredictionCVSDto[] | any;
 
+  public grid: PredictionMPGDto[] = [];
   public isUploadedFile = false;
 
-  @ViewChild('uploadSCV', { static: false })
-  protected uploadSCV!: UploadScvComponent;
+  public constructor(private readonly predictService: PredictService) {}
+  ngOnInit(): void {}
 
-  public constructor() {}
+  public fileName = '';
+  public predictedData: any;
+  public isLoading = false;
 
-  public ngOnInit(): void {
-    if (this.uploadSCV?.fileName !== undefined) {
-      this.isUploadedFile = !this.isUploadedFile;
+  public async onUploadCSV(event: any) {
+    this.isLoading = true;
+    const file: File = event.target.files[0];
+
+    if (file) {
+      this.fileName = file.name;
+      const formData = new FormData();
+      formData.append('csv', file);
+      try {
+        await this.predictService
+          .getFileUploadAsync(formData)
+          .then(async (result) => {
+            this.predictedData = await this.predictService.getBulkValuesAsync(
+              result
+            );
+            this.predictedData['predicted_label']
+              .forEach((element: any) => {
+                this.grid.push({ MPG: element });
+              })
+              // .then((result: string) => {
+              //   this.predictService
+              //     .getUrl(result)
+              //     .subscribe((data) => console.log(data));
+              // });
+          });
+      } finally {
+        this.dataSource = new MatTableDataSource(this.grid);
+        console.log(this.grid);
+        this.isLoading = false;
+      }
     }
   }
 }

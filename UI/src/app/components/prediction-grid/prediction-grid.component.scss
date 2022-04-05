@@ -1,5 +1,12 @@
-mat-table {
-  margin: 2%;
+// mat-table {
+//   margin: 2%;
+// }
+
+.mpg-table {
+  max-width: max-content;
+}
+.csv-table {
+  width: -webkit-fill-available;
 }
 
 .wrap {
@@ -13,6 +20,8 @@ mat-table {
   .right {
     float: right;
     width: 80%;
+    display: flex;
+    flex-direction: row;
   }
 }
 
@@ -27,18 +36,55 @@ mat-card {
   padding: 0;
 }
 
-.mat-column-MPG {
-  width: 32px;
-  border-right: 1px solid currentColor;
-  padding-right: 24px;
-  text-align: center;
-}
+// .mat-column-MPG {
+//   width: 32px;
+//   border-right: 1px solid currentColor;
+//   padding-right: 24px;
+//   text-align: center;
+// }
 
-.mat-column-cylinders {
-  padding-left: 16px;
-}
+// .mat-column-cylinders {
+//   padding-left: 16px;
+// }
 
 .no__date {
   text-align: center;
+  padding-top: 15%;
+}
+
+
+
+/**/
+.card__button--right {
+  .icon-upload {
+    font-size: large;
+  }
+}
+
+::-webkit-file-upload-button {
+  display: none;
+}
+
+.file-upload {
+  padding-top: 2%;
+  padding-left: 10%;
+  font-weight: bold;
+}
+
+.valid-file {
+  color: darkslategray;
+}
+
+.invalid-file {
+  color: red;
+}
+
+.container {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: flex-end;
+  padding-left: 15%;
   padding-top: 15%;
 }
