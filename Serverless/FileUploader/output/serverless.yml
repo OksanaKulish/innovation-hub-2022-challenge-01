@@ -1,0 +1,46 @@
+service: Challenge01Uploader
+
+package:
+  individually: true
+
+provider:
+  name: aws
+  runtime: dotnetcore3.1
+  region: eu-west-2
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
+  iam:
+    role:
+      statements: 
+        - Effect: Allow
+          Action: 
+            - sqs:SendMessage
+            - sqs:GetQueueUrl
+            - sqs:DeleteMessage
+            - sqs:ReceiveMessage
+            - sqs:GetQueueAttributes
+          Resource: 'arn:aws:sqs:eu-west-1:*:*'
+        - Effect: Allow
+          Action: 
+            - dynamodb:*
+          Resource: 'arn:aws:dynamodb:eu-west-1:*:*'
+        - Effect: Allow
+          Action: 
+            - s3:*
+          Resource: 'arn:aws:s3:::angular-simple-ui/*'
+ 
+functions:
+  challenge01-fileUpload:
+    name: challenge01FileUpload
+    handler: Challenge01FileUpload::Challenge01FileUpload.LambdaEntryPoint::FunctionHandlerAsync
+    memorySize: 512
+    timeout: 30    
+    events:
+      - http: 
+          method: any
+          path: /{proxy+}
+          cors: true
+    
+    package:
+      artifact: ./Challenge01FileUpload.zip
