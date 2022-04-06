@@ -73,7 +73,7 @@ def data_prep(event):
 
 def predict(data):
     results = model.predict(data).flatten()
-    results = results.astype(str)
+    results = results.astype(str).tolist()
     return results
 
 @app.route('/getValue', methods=['POST'])
@@ -123,12 +123,13 @@ def getBulkValue():
     print(results)
 
     data = {
-        "predicted_label" : str(results[0])
+        "predicted_label" : results
     }
-    return {
-        'args': request.args['url'],
-        'method': 'ok'
-    }
+    return (
+        json.dumps(data),
+        200,
+        {'Content-Type': 'application/json'}
+    )
 
 @app.route('/ping', methods=['GET', 'POST'])
 def ping():
