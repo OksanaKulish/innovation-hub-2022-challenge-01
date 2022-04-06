@@ -1,0 +1,17 @@
+
+.gridster-item-content {
+  padding: 1em;
+}
+
+:host {
+  .gridster {
+    background-color: transparent;
+    > gridster-item {
+      background-color: gray;
+      > .item-container {
+        width: 100;
+      }
+    }
+
+  }
+}
