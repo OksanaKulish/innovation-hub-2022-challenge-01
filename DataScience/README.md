@@ -42,8 +42,12 @@ Possible solutions:<br>
 2.2 Find the closest images:
 * Choose metric (such as Euclidean distance) and compare all images' distances to find the closet ones
 * Use any clusterization approach 
+3. Multimodal Search:<br>
+In multimodal search the input query include both text and image query.<br>
+![plot](assets/Multimodal_search.PNG)
 
 Resources:
 * [CBIR using CNN](https://medium.com/sicara/keras-tutorial-content-based-image-retrieval-convolutional-denoising-autoencoder-dc91450cc511)
 * [CBIR with Siamese networks](https://neptune.ai/blog/content-based-image-retrieval-with-siamese-networks) (also with the text input)
 * [Features extraction with Tensorflow (Decoder-Encoder and VGG)](https://www.analyticsvidhya.com/blog/2021/01/querying-similar-images-with-tensorflow/)
+* [Multimodal search](https://arxiv.org/pdf/1806.08896.pdf)
