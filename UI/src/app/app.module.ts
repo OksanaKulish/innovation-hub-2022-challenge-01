@@ -17,6 +17,7 @@ import { SharedModule } from './shared/components/shared.module';
 import { LayoutModule } from './layout/layout.module';
 import { ComponentsModule } from './components/components.module';
 import { ErrorInterceptor } from './web-api/interceptors/error-response.interceptor';
+import { DashboardModule } from './components/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,11 +32,12 @@ import { ErrorInterceptor } from './web-api/interceptors/error-response.intercep
     SharedModule,
     LayoutModule,
     ComponentsModule,
+    DashboardModule
   ],
   providers: [
     HttpClient,
     PredictService,
-    YearPickerComponent,
+    YearPickerComponent
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: ErrorInterceptor,
