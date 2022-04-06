@@ -1,1 +1,5 @@
 https://www.docker.com/blog/how-to-use-your-own-registry-2/
+https://kubernetes.io/docs/tasks/configure-pod-container/translate-compose-kubernetes/
+https://docs.docker.com/registry/
+https://blog.mayadata.io/openebs/steps-to-deploy-angular-application-on-kubernetes
+https://collabnix.github.io/kubelabs/pods101/deploy-your-first-nginx-pod.html

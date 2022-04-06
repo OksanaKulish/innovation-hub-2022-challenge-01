@@ -1,15 +1,17 @@
 version: '3'
 
 services:
-  frontend:
-    container_name: challenge01-ui
-    image: challenge01ui:latest
-    build: ./UI
-    ports:
-      - "8080:80"
-
-#  serverless:
-#    container_name: challenge01-serverless
-#    build: ./Serverless/MilesPerGalonPrediction/app
+#  frontend:
+#    container_name: challenge01-ui
+#    image: challenge01ui:latest
+#    build: ./UI
 #    ports:
-#      - "3001:8080"
+#      - "8080:80"
+
+
+  api_python:
+    container_name: challenge01-api-python
+    image: challenge01api-python:v4
+    build: ./API
+    ports:
+      - "5000:5000"

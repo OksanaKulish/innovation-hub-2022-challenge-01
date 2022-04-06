@@ -1,0 +1,9 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: t3micro-cluster
+  region: eu-west-2
+managedNodeGroups:
+- name: node-group-nano
+  instanceType: t3.micro
+  desiredCapacity: 2  

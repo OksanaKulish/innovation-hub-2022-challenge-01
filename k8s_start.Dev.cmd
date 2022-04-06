@@ -1,5 +1,5 @@
 rem docker-compose build
-rem 
 kubectl apply -f frontend.dev.yaml
+kubectl apply -f apiPython.dev.yaml
 
 pause
