@@ -9,123 +9,108 @@
 
 <ng-template #manualDateSet>
   <!-- <div class="container"> -->
-    <mat-card class="mat-elevation-z3 input-card">
-      <mat-card-title class="card-container">
-        <div class="action__left" align="end">
-          <h2 class="sub-title">Data configuration</h2>
-          <app-tooltip></app-tooltip>
-        </div>
-      </mat-card-title>
+  <mat-card class="mat-elevation-z3 input-card">
+    <mat-card-title class="card-container">
+      <div class="action__left" align="end">
+        <h2 class="sub-title">Data configuration</h2>
+        <app-tooltip></app-tooltip>
+      </div>
+    </mat-card-title>
 
+    <mat-card-content>
+      <section class="input-section">
+        <form [formGroup]="form" (ngSubmit)="onPredict()" method="POST">
+          <mat-form-field class="input-margin input-width" appearance="fill">
+            <mat-label> Cylinders </mat-label>
+            <input matInput type="number" formControlName="Cylinders" />
+            <mat-error *ngIf="isCtrlValid('Cylinders')">
+              Field {{ isCtrlValid("Cylinders")[0] }} is required.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="input-margin input-width" appearance="fill">
+            <mat-label> Displacement </mat-label>
+            <input matInput type="number" formControlName="Displacement" />
+            <mat-error *ngIf="isCtrlValid('Displacement')">
+              Field {{ isCtrlValid("Displacement")[0] }} is required.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="input-margin input-width" appearance="fill">
+            <mat-label> Horsepower </mat-label>
+            <input matInput type="number" formControlName="Horsepower" />
+            <mat-error *ngIf="isCtrlValid('Horsepower')">
+              Field {{ isCtrlValid("Horsepower")[0] }} is required.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="input-margin input-width" appearance="fill">
+            <mat-label> Weight </mat-label>
+            <input matInput type="number" formControlName="Weight" />
+            <mat-error *ngIf="isCtrlValid('Weight')">
+              Field {{ isCtrlValid("Weight")[0] }} is required.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="input-margin input-width" appearance="fill">
+            <mat-label> Acceleration </mat-label>
+            <input matInput type="number" formControlName="Acceleration" />
+            <mat-error *ngIf="isCtrlValid('Acceleration')">
+              Field {{ isCtrlValid("Acceleration")[0] }} is required.
+            </mat-error>
+          </mat-form-field>
+
+          <app-year-picker
+            [formControl]="_yearPickerCtrl"
+            [label]="label"
+            [min]="minDate"
+          ></app-year-picker>
+
+          <mat-form-field class="input-margin input-width" appearance="fill">
+            <mat-label> Origin </mat-label>
+            <input matInput type="number" formControlName="Origin" />
+            <mat-error *ngIf="isCtrlValid('Origin')"
+              >Field {{ isCtrlValid("Origin")[0] }} is required.</mat-error
+            >
+          </mat-form-field>
+
+          <mat-card-actions class="button-align--right" align="end">
+            <button
+              mat-raised-button
+              class="button--blue"
+              type="submit"
+              [disabled]="!form.valid"
+              id="predict-button"
+            >
+              Predict
+            </button>
+            <button
+              mat-raised-button
+              type="button"
+              id="reset-button"
+              (click)="onResetPrediction()"
+            >
+              <mat-icon> autorenew </mat-icon>
+              Reset
+            </button>
+          </mat-card-actions>
+        </form>
+      </section>
+      <app-loading-bar [loading]="isLoading"></app-loading-bar>
+    </mat-card-content>
+  </mat-card>
+
+  <ng-container *ngTemplateOutlet="predictedResult"> </ng-container>
+
+  <ng-template #predictedResult>
+    <mat-card class="mat-elevation-z3 predicted-card">
       <mat-card-content>
-        <section class="input-section">
-          <form [formGroup]="form" (ngSubmit)="onPredict()" method="POST">
-            <mat-form-field class="input-margin input-width" appearance="fill">
-              <mat-label> Cylinders </mat-label>
-              <input matInput type="text" min="0" formControlName="Cylinders" />
-              <mat-error *ngIf="isCtrlValid('Cylinders')">
-                Field {{ isCtrlValid("Cylinders")[0] }} is required.
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field class="input-margin input-width" appearance="fill">
-              <mat-label> Displacement </mat-label>
-              <input
-                matInput
-                type="number"
-                min="0"
-                formControlName="Displacement"
-              />
-              <mat-error *ngIf="isCtrlValid('Displacement')">
-                Field {{ isCtrlValid("Displacement")[0] }} is required.
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field class="input-margin input-width" appearance="fill">
-              <mat-label> Horsepower </mat-label>
-              <input
-                matInput
-                type="number"
-                min="0"
-                formControlName="Horsepower"
-              />
-              <mat-error *ngIf="isCtrlValid('Horsepower')">
-                Field {{ isCtrlValid("Horsepower")[0] }} is required.
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field class="input-margin input-width" appearance="fill">
-              <mat-label> Weight </mat-label>
-              <input matInput type="number" min="0" formControlName="Weight" />
-              <mat-error *ngIf="isCtrlValid('Weight')">
-                Field {{ isCtrlValid("Weight")[0] }} is required.
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field class="input-margin input-width" appearance="fill">
-              <mat-label> Acceleration </mat-label>
-              <input
-                matInput
-                type="number"
-                min="0"
-                formControlName="Acceleration"
-              />
-              <mat-error *ngIf="isCtrlValid('Acceleration')">
-                Field {{ isCtrlValid("Acceleration")[0] }} is required.
-              </mat-error>
-            </mat-form-field>
-
-            <app-year-picker
-              [formControl]="_yearPickerCtrl"
-              [label]="label"
-              [min]="minDate"
-            ></app-year-picker>
-
-            <mat-form-field class="input-margin input-width" appearance="fill">
-              <mat-label> Origin </mat-label>
-              <input matInput type="number" min="0" formControlName="Origin" />
-              <mat-error *ngIf="isCtrlValid('Origin')"
-                >Field {{ isCtrlValid("Origin")[0] }} is required.</mat-error
-              >
-            </mat-form-field>
-
-            <mat-card-actions class="button-align--right" align="end">
-              <button
-                mat-raised-button
-                class="button--blue"
-                type="submit"
-                [disabled]="!form.valid"
-                id="predict-button"
-              >
-                Predict
-              </button>
-              <button
-                mat-raised-button
-                type="button"
-                id="reset-button"
-                (click)="onResetPrediction()"
-              >
-                <mat-icon> autorenew </mat-icon>
-                Reset
-              </button>
-            </mat-card-actions>
-          </form>
-        </section>
-        <app-loading-bar [loading]="isLoading"></app-loading-bar>
+        <h2>Estimated MPG</h2>
+        <br />
+        <br />
       </mat-card-content>
+      <h2>{{ predictedValue ?? 0 }}</h2>
     </mat-card>
-
-    <ng-container *ngTemplateOutlet="predictedResult"> </ng-container>
-
-    <ng-template #predictedResult>
-      <mat-card class="mat-elevation-z3 predicted-card">
-        <mat-card-content>
-          <h2>Estimated MPG</h2>
-          <br />
-          <br />
-        </mat-card-content>
-        <h2>{{ predictedValue ?? 0 }}</h2>
-      </mat-card>
-    </ng-template>
+  </ng-template>
   <!-- </div> -->
 </ng-template>

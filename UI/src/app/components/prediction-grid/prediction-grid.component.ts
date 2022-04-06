@@ -1,46 +1,86 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { UploadScvComponent } from 'src/app/shared/components/upload-scv/upload-scv.component';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { PredictService } from 'src/app/web-api/services/predict.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface PredictionMPGDto {
+  MPG: number;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+export interface PredictionCVSDto {
+  cylinders: number;
+  weight: number;
+  displacement: number;
+}
 
+export interface InputDataDto {
+  // Cylinders: string;
+  // Displacement: string;
+  // Horsepower: string;
+  // Weight: string;
+  // Acceleration: string;
+  // 'Model year': string;
+  // Origin: string;
+  MPG: number;
+}
 @Component({
   selector: 'app-prediction-grid',
   templateUrl: './prediction-grid.component.html',
-  styleUrls: ['./prediction-grid.component.scss']
+  styleUrls: ['./prediction-grid.component.scss'],
 })
-
 export class PredictionGridComponent implements OnInit {
-  public displayedColumns: string[] = ['cylinders', 'displacement', 'horsepower', 'weight', 'acceleration', 'model_year', 'origin'];
-  public dataSource = ELEMENT_DATA;
+  public displayedColumns: string[] = ['MPG'];
+  public displayedColumns2: string[] = [
+    'cylinders',
+    'displacement',
+    'horsepower',
+    'weight',
+    'acceleration',
+    'model_year',
+    'origin',
+  ];
+  public dataSource: PredictionMPGDto[] | any;
+  public dataSource2: PredictionCVSDto[] | any;
 
+  public grid: PredictionMPGDto[] = [];
   public isUploadedFile = false;
 
-  @ViewChild('uploadSCV', { static: false })
-  protected uploadSCV!: UploadScvComponent;
+  public constructor(private readonly predictService: PredictService) {}
+  ngOnInit(): void {}
 
-  public constructor() { }
+  public fileName = '';
+  public predictedData: any;
+  public isLoading = false;
+  public s: any;
+  public async onUploadCSV(event: any) {
+    this.isLoading = true;
+    const file: File = event.target.files[0];
 
-  public ngOnInit(): void {
-    if(this.uploadSCV?.fileName !== undefined) {
-      this.isUploadedFile = !this.isUploadedFile;
+    if (file) {
+      this.fileName = file.name;
+      const formData = new FormData();
+      formData.append('csv', file);
+      try {
+        await this.predictService
+          .getFileUploadAsync(formData)
+          .then(async (result: any) => {
+            if (result) {
+              this.predictedData = await this.predictService.getBulkValuesAsync(
+                result
+              );
+              this.predictService
+                .getUrl(result.url)
+                .subscribe((data) => data);
+
+              this.predictedData['predicted_label'].forEach((element: any) => {
+                this.grid.push({ MPG: element });
+              });
+            }
+          });
+      } finally {
+        this.dataSource = new MatTableDataSource(this.grid);
+        // console.log(this.grid);
+        this.isLoading = false;
+      }
     }
   }
 }

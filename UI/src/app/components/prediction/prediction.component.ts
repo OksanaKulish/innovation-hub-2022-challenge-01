@@ -19,12 +19,12 @@ export class PredictionComponent implements OnInit {
   public minDate = 988;
 
   public form = new FormGroup({
-    Cylinders: new FormControl(8, Validators.required),
-    Displacement: new FormControl(307, Validators.required),
-    Horsepower: new FormControl(130, Validators.required),
-    Weight: new FormControl(3504, Validators.required),
-    Acceleration: new FormControl(12, Validators.required),
-    Origin: new FormControl(1, Validators.required),
+    Cylinders: new FormControl(8, [Validators.required, Validators.min(0)]),
+    Displacement: new FormControl(307, [Validators.required, Validators.min(0)]),
+    Horsepower: new FormControl(130, [Validators.required, Validators.min(0)]),
+    Weight: new FormControl(3504, [Validators.required, Validators.min(0)]),
+    Acceleration: new FormControl(12, [Validators.required, Validators.min(0)]),
+    Origin: new FormControl(1, [Validators.required, Validators.min(0)]),
   });
 
   public _yearPickerCtrl: FormControl = new FormControl(

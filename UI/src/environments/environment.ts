@@ -5,7 +5,8 @@
 export const environment = {
   // apiUrl: 'http://localhost:3000',
   apiUrl: 'https://pz6irm4l4g.execute-api.eu-west-2.amazonaws.com/Prod/',
-  production: false
+  uploadCSVUrl: 'https://q2q3wadoai.execute-api.eu-west-2.amazonaws.com/',
+  production: false,
 };
 
 /*
