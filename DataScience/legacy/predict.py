@@ -5,7 +5,8 @@ from keras.models import load_model
 # TODO: add logging
 # TODO: add exceptions for use cases
 
-model = load_model("trained_models/model_epoch200_adam001.ckpt")
+model_path = "../trained_models/model_epoch200_adam001.ckpt"
+model = load_model(model_path)
 
 
 def data_prep(data):
@@ -23,7 +24,7 @@ def predict(data):
 
 
 if __name__ == "__main__":
-    dataset = pd.read_csv("data/Auto_MPG.csv")
+    dataset = pd.read_csv("../data/Auto_MPG.csv")
 
     # TODO: change when input json
     dataset = dataset.dropna()  # drop all rows if any NaN
