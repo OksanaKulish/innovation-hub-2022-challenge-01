@@ -1,33 +1,37 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-
+import { Component } from '@angular/core';
+import { PredictService } from 'src/app/web-api/services/predict.service';
 @Component({
   selector: 'app-upload-scv',
   templateUrl: './upload-scv.component.html',
   styleUrls: ['./upload-scv.component.scss'],
 })
-export class UploadScvComponent implements OnInit, OnChanges {
-  public fileName = '';
-  public details: File | undefined
+export class UploadScvComponent {
+  // public fileName = '';
+  // public predictedData: any;
+  // public isLoading = false;
 
-  public constructor(private http: HttpClient) {}
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.details + 'TESTSSS');
-  }
+  // public constructor(private readonly predictService: PredictService) {}
 
-  public ngOnInit(): void {}
+  // public async onUploadCSV(event: any) {
+  //   this.isLoading = true;
+  //   const file: File = event.target.files[0];
 
-  public onUploadCSV(event: any) {
-    const file: File = event.target.files[0];
-    console.log(file);
-    this.details = file;
-
-    if (file) {
-      this.fileName = file.name;
-      const formData = new FormData();
-      formData.append('csv', file);
-      const upload$ = this.http.post('/api/csv-upload', formData);
-      upload$.subscribe();
-    }
-  }
+  //   if (file) {
+  //     this.fileName = file.name;
+  //     const formData = new FormData();
+  //     formData.append('csv', file);
+  //     try {
+  //       await this.predictService
+  //         .getFileUploadAsync(formData)
+  //         .then(async (result) => {
+  //           this.predictedData = await this.predictService.getBulkValuesAsync(
+  //             result
+  //           );
+  //           console.log(this.predictedData);
+  //         });
+  //     } finally {
+  //       this.isLoading = false;
+  //     }
+  //   }
+  // }
 }

@@ -19,8 +19,14 @@ export abstract class WebApiBaseService {
   protected async requestAsync<T>(
     method: string,
     relativeApiUrl: string,
-    body?: any
+    body?: any,
+    isUpload?: boolean
   ): Promise<T> {
+    if (isUpload == true) {
+      this._apiEndpoint = this.normalize(environment.uploadCSVUrl);
+    } else {
+      this._apiEndpoint = this.normalize(environment.apiUrl);
+    }
     const url = this._apiEndpoint + relativeApiUrl;
 
     const options = {
@@ -47,8 +53,12 @@ export abstract class WebApiBaseService {
     return this.requestAsync<T>('get', relativeApiUrl, body);
   }
 
-  protected postAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {
-    return this.requestAsync<T>('post', relativeApiUrl, body);
+  protected postAsync<T>(
+    relativeApiUrl: string,
+    body?: any,
+    isUpload?: boolean
+  ): Promise<T> {
+    return this.requestAsync<T>('post', relativeApiUrl, body, isUpload);
   }
 
   protected putAsync<T>(relativeApiUrl: string, body?: any): Promise<T> {

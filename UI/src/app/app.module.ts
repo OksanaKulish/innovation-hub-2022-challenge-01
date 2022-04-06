@@ -36,11 +36,11 @@ import { ErrorInterceptor } from './web-api/interceptors/error-response.intercep
     HttpClient,
     PredictService,
     YearPickerComponent,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: ErrorInterceptor,
+    //   multi: true,
+    // },
   ],
   bootstrap: [AppComponent],
 })
