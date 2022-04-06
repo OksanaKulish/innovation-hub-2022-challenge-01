@@ -5,7 +5,7 @@ metadata:
     io.kompose.service: api-python
   name: api-python
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       io.kompose.service: api-python
@@ -15,7 +15,7 @@ spec:
         io.kompose.service: api-python
     spec:
       containers:
-        - image: challenge01api-python:v3
+        - image: challenge01api-python:v7
           name: api-python
           ports:
             - containerPort: 5000

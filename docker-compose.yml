@@ -11,7 +11,7 @@ services:
 
   api_python:
     container_name: challenge01-api-python
-    image: challenge01api-python:v4
+    image: challenge01api-python:v7
     build: ./API
     ports:
       - "5000:5000"
