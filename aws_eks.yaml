@@ -5,5 +5,5 @@ metadata:
   region: eu-west-2
 managedNodeGroups:
 - name: node-group-nano
-  instanceType: t3.micro
-  desiredCapacity: 2  
+  instanceType: t3.nano
+  desiredCapacity: 3

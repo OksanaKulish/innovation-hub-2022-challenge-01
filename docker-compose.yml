@@ -1,17 +1,16 @@
 version: '3'
 
 services:
-#  frontend:
-#    container_name: challenge01-ui
-#    image: challenge01ui:latest
-#    build: ./UI
-#    ports:
-#      - "8080:80"
-
-
   api_python:
     container_name: challenge01-api-python
-    image: challenge01api-python:v7
-    build: ./API
+    image: challenge01api-python:v8
+    build: ./API/python
     ports:
       - "5000:5000"
+
+  api_aspnet:
+    container_name: challenge01-api-aspnet
+    image: challenge01api-aspnet:v1
+    build: ./API/aspnet
+    ports:
+      - "5001:5001"
