@@ -1,7 +1,3 @@
-// mat-table {
-//   margin: 2%;
-// }
-
 .mpg-table {
   max-width: max-content;
 }
@@ -16,12 +12,15 @@
   .left {
     float: left;
     width: 20%;
+    border: 0.5px solid #ececec;
+    border-bottom: none;
+    box-shadow: none;
   }
 
   .right {
     float: right;
     width: 80%;
-    height: 67vh;
+    height: 65vh;
     display: flex;
     flex-direction: row;
   }
@@ -44,16 +43,16 @@ mat-card {
   padding: 0;
 }
 
-// .mat-column-MPG {
-//   min-width: max-content;
-//   border-right: 1px solid currentColor;
-//   padding-right: 24px;
-//   text-align: center;
-// }
+.mat-column-MPG {
+  min-width: max-content;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
 
-// .mat-column-cylinders {
-//   padding-left: 16px;
-// }
+.mat-column-cylinders {
+  padding-left: 16px;
+}
 
 .no__date {
   text-align: center;
