@@ -1,0 +1,1 @@
+docker build -t challenge01api-dotnet:latest .
