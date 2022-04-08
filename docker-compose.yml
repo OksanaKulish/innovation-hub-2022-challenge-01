@@ -3,14 +3,14 @@ version: '3'
 services:
   api_python:
     container_name: challenge01-api-python
-    image: challenge01api-python:v8
+    image: olegzhel/challenge01api-python:v0.1
     build: ./API/python
     ports:
       - "5000:5000"
 
   api_aspnet:
-    container_name: challenge01-api-aspnet
-    image: challenge01api-aspnet:v1
-    build: ./API/aspnet
+    container_name: challenge01-api-dotnet
+    image: olegzhel/challenge01api-dotnet:v0.1
+    build: ./API/dotnet
     ports:
-      - "5001:5001"
+      - "5001:80"
