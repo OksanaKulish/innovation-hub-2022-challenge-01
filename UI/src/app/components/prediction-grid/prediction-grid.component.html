@@ -5,7 +5,7 @@
     </mat-toolbar-row>
     <ng-container *ngTemplateOutlet="browseCSV"> </ng-container>
   </mat-card>
-  <mat-card class="right">
+  <mat-card class="right mat-elevation-z0">
     <div *ngIf="dataSource; then grid; else noData"></div>
     <mat-spinner class="loading__center" *ngIf="isLoading"></mat-spinner>
     <ng-template #grid>
@@ -41,7 +41,7 @@
         accept=".csv"
         class="file-upload"
         [ngClass]="{ 'valid-file': fileName, 'invalid-file': fileName == null }"
-        (change)="onUploadCSV($event)"
+        (change)="onUploadCSV($event); readCSV($event)"
       />
       <div></div>
     </div>
@@ -51,6 +51,7 @@
 </ng-template>
 
 <ng-template #gridMGP>
+  <div class="grid">
   <mat-table
     mat-table
     [dataSource]="dataSource"
@@ -65,9 +66,12 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
+  </div>
 </ng-template>
 
+
 <ng-template #gridCSV>
+  <!-- <div class="grid"> -->
   <mat-table
     mat-table
     [dataSource]="dataSource2"
@@ -126,4 +130,5 @@
     <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns2"></mat-row>
   </mat-table>
+<!-- </div> -->
 </ng-template>
