@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: api-dotnet
+  name: api-dotnet
+spec:
+  selector:
+    matchLabels:
+      io.kompose.service: api-dotnet
+  template:
+    metadata:
+      labels:
+        io.kompose.service: api-dotnet
+    spec:
+      containers:
+        - image: olegzhel/challenge01api-dotnet:v0.5
+          name: api-dotnet
+          ports:
+          - containerPort: 80
+          resources: {}
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: api-dotnet
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: api-dotnet
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: api-dotnet
+  name: api-dotnet
+spec:
+  ports:
+    - name: service-dotnet-port-name
+      port: 80
+      targetPort: 80 
+      protocol: TCP
+  selector:
+    io.kompose.service: api-dotnet

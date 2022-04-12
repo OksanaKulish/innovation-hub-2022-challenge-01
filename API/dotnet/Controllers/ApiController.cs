@@ -17,12 +17,13 @@ namespace dotnet.Controllers
         public ApiController(ILogger<ApiController> logger) => _logger = logger;
         
 
-        [HttpGet]
-        public dynamic Get()
+        [HttpGet("gettest")]
+        public dynamic GetTest()
         {
             return new
             {
                 Date = DateTime.Now,
+		Responser = GetType().Name,
                 Status = "Ok"
             };
         }

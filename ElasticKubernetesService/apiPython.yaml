@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: api-python
+  name: api-python
+spec:
+  selector:
+    matchLabels:
+      io.kompose.service: api-python
+  template:
+    metadata:
+      labels:
+        io.kompose.service: api-python
+    spec:
+      containers:
+        - image: olegzhel/challenge01api-python:v0.2
+          name: api-python
+          ports:
+            - containerPort: 5000
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: api-python
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: api-python
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: api-python
+  name: api-python
+spec:
+  ports:
+    - name: service-python-port-name
+      port: 5000
+      targetPort: 5000 
+      protocol: TCP
+  selector:
+    io.kompose.service: api-python

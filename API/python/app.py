@@ -104,6 +104,7 @@ def getBulkValue():
 def ping():
     return {
         'statusCode': 200,
+	'Responser': 'pythonAPI',
         'body': 'ping is ok'
     }
 

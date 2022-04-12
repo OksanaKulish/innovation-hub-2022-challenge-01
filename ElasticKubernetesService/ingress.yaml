@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-hosts
+
+spec:
+  ingressClassName: kong
+  rules:
+  - http:
+      paths:
+      - path: /api
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: api-dotnet
+            port: 
+              number: 80
+      - path: /api/getValue
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: api-python
+            port: 
+              number: 5000
+      - path: /api/getBulkValues
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: api-python
+            port: 
+              number: 5000
+      - path: /api/ping
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: api-python
+            port: 
+              number: 5000
