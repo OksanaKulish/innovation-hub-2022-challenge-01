@@ -8,6 +8,7 @@ import { PredictionComponent } from './prediction/prediction.component';
 import { PredictionGridComponent } from './prediction-grid/prediction-grid.component';
 import { GridsterModule } from 'angular-gridster2';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { LineChartComponent } from '../shared/components/line-chart/line-chart.component';
 
 const SHARED_DECLARATIVES = [
   PredictionComponent
@@ -22,7 +23,7 @@ const SHARED_DECLARATIVES = [
       MaterialModule,
       ReactiveFormsModule,
       SharedModule,
-      DashboardModule
+      DashboardModule,
     ],
     providers: [
       ],

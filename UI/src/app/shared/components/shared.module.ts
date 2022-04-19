@@ -7,12 +7,18 @@ import { MaterialModule } from 'src/app/material.module';
 import { YearPickerComponent } from './year-picker/year-picker.component';
 import { UploadScvComponent } from './upload-scv/upload-scv.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
+import { BarComponent } from './bar/bar.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 const SHARED_DECLARATIVES = [
   LoadingBarComponent,
   YearPickerComponent,
   UploadScvComponent,
-  TooltipComponent
+  TooltipComponent,
+  BarComponent,
+  LineChartComponent,
+
 ];
 
 @NgModule({
@@ -21,7 +27,8 @@ const SHARED_DECLARATIVES = [
     FormsModule,
     RouterModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HighchartsChartModule
   ],
   exports: SHARED_DECLARATIVES,
   declarations: SHARED_DECLARATIVES,

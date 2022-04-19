@@ -13,7 +13,9 @@
       <ng-container *ngTemplateOutlet="gridCSV"> </ng-container>
     </ng-template>
     <ng-template #noData>
-      <div class="no__date">Browse file for data preview and MPG prediction.</div>
+      <div class="no__date">
+        Browse file for data preview and MPG prediction.
+      </div>
     </ng-template>
   </mat-card>
 </div>
@@ -45,33 +47,29 @@
       />
       <div></div>
     </div>
-    <!-- <pre>{{ predictedData ?? 'File is not uploded' | json }}</pre> -->
-
   </div>
 </ng-template>
 
 <ng-template #gridMGP>
   <div class="grid">
-  <mat-table
-    mat-table
-    [dataSource]="dataSource"
-    class="mat-elevation-z1 mpg-table"
-  >
-    <!-- MPG Column -->
-    <ng-container matColumnDef="MPG">
-      <mat-header-cell *matHeaderCellDef> MPG </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.MPG }} </mat-cell>
-    </ng-container>
+    <mat-table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z1 mpg-table"
+    >
+      <!-- MPG Column -->
+      <ng-container matColumnDef="MPG">
+        <mat-header-cell *matHeaderCellDef> MPG </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.MPG }} </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-  </mat-table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
   </div>
 </ng-template>
 
-
 <ng-template #gridCSV>
-  <!-- <div class="grid"> -->
   <mat-table
     mat-table
     [dataSource]="dataSource2"
@@ -130,5 +128,4 @@
     <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns2"></mat-row>
   </mat-table>
-<!-- </div> -->
 </ng-template>

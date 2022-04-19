@@ -18,6 +18,7 @@ import { LayoutModule } from './layout/layout.module';
 import { ComponentsModule } from './components/components.module';
 import { ErrorInterceptor } from './web-api/interceptors/error-response.interceptor';
 import { DashboardModule } from './components/dashboard/dashboard.module';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +33,8 @@ import { DashboardModule } from './components/dashboard/dashboard.module';
     SharedModule,
     LayoutModule,
     ComponentsModule,
-    DashboardModule
+    DashboardModule,
+    HighchartsChartModule
   ],
   providers: [
     HttpClient,

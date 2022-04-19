@@ -14,6 +14,13 @@ import { DashboardGridsterConfigService } from './dashboard-gridster-config.serv
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  public data = [
+    {
+      value: 20,
+      date: '2020-05-12T12:19:00+00:00'
+    }
+  ];
+
   public config: GridsterConfig | any;
   public items: Array<GridsterItem>| any;
   constructor(
