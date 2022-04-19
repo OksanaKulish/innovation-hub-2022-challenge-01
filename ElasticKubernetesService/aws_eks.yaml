@@ -1,9 +1,22 @@
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
-  name: t3micro-cluster
+  name: t3small-cluster
   region: eu-west-2
+
 managedNodeGroups:
-- name: node-group-nano
-  instanceType: t3.nano
-  desiredCapacity: 3
+- name: node-group-small
+  labels:
+    role: managed-nodes
+  instanceType: t3.small
+  minSize: 1
+  maxSize: 10
+  desiredCapacity: 1
+  volumeSize: 20
+
+cloudWatch:
+    clusterLogging:
+        # enable specific types of cluster control plane logs
+        enableTypes: ["audit", "authenticator", "controllerManager"]
+        # all supported types: "api", "audit", "authenticator", "controllerManager", "scheduler"
+        # supported special values: "*" and "all"
