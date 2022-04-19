@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-dotnet
+spec:
+  selector:
+    matchLabels:
+      app: api-dotnet
+  template:
+    metadata:
+      labels:
+        app: api-dotnet
+    spec:
+      containers:
+      - image: olegzhel/challenge01api-dotnet:v0.9
+        name: api-dotnet
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 800m
+#            memory: "300Mi"
+          requests:
+            cpu: 300m
+            memory: "200Mi"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role
+                operator: In
+                values:
+                - managed-nodes
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - api-dotnet
+            topologyKey: kubernetes.io/hostname
+            namespaces:
+            - default
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: api-dotnet
+  name: api-dotnet
+spec:
+  ports:
+    - name: service-dotnet-port-name
+      port: 80
+      targetPort: 80 
+      protocol: TCP
+  selector:
+    app: api-dotnet
+
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: api-dotnet
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: api-dotnet
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 200
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 150

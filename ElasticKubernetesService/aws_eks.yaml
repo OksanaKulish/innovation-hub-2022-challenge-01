@@ -12,6 +12,7 @@ managedNodeGroups:
   minSize: 1
   maxSize: 10
   desiredCapacity: 1
+  volumeSize: 20
 
 cloudWatch:
     clusterLogging:

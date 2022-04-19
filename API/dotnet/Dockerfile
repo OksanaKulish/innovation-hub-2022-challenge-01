@@ -11,7 +11,7 @@ RUN dotnet publish -c Release -o out
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
-EXPOSE 80
+#EXPOSE 80
 COPY --from=build /app/out .
 
 ENTRYPOINT ["dotnet", "dotnet.dll"]

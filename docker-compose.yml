@@ -10,7 +10,7 @@ services:
 
   api_aspnet:
     container_name: challenge01-api-dotnet
-    image: olegzhel/challenge01api-dotnet:v0.5
+    image: olegzhel/challenge01api-dotnet:v0.6
     build: ./API/dotnet
     ports:
       - "5001:80"
