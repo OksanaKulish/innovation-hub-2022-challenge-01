@@ -2,23 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, } from '@angular/router';
-import { LoadingBarComponent } from './loading-bar/loading-bar.component';
+import { LoadingBarComponent } from './components/loading-bar/loading-bar.component';
 import { MaterialModule } from 'src/app/material.module';
-import { YearPickerComponent } from './year-picker/year-picker.component';
-import { UploadScvComponent } from './upload-scv/upload-scv.component';
-import { TooltipComponent } from './tooltip/tooltip.component';
-import { BarComponent } from './bar/bar.component';
-import { LineChartComponent } from './line-chart/line-chart.component';
+import { YearPickerComponent } from './components/year-picker/year-picker.component';
+import { UploadScvComponent } from './components/upload-scv/upload-scv.component';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { GridsterModule } from 'angular-gridster2';
+import { BoldPipe } from './pipes/bold.pipe';
 
 const SHARED_DECLARATIVES = [
   LoadingBarComponent,
   YearPickerComponent,
   UploadScvComponent,
   TooltipComponent,
-  BarComponent,
   LineChartComponent,
-
+  BoldPipe
 ];
 
 @NgModule({
@@ -28,7 +28,8 @@ const SHARED_DECLARATIVES = [
     RouterModule,
     MaterialModule,
     ReactiveFormsModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    GridsterModule
   ],
   exports: SHARED_DECLARATIVES,
   declarations: SHARED_DECLARATIVES,

@@ -11,7 +11,7 @@ import { PredictionMPGDto } from '../prediction-grid/prediction-grid.component';
   styleUrls: [
     './prediction.component.scss',
     '../../../assets/material-custom.scss',
-  ]
+  ],
 })
 export class PredictionComponent implements OnInit {
   public MPG: PredictionMPGDto[] = [];
@@ -19,17 +19,14 @@ export class PredictionComponent implements OnInit {
   public isLoaded: boolean = false;
   public getMPGFromChild($event: PredictionMPGDto[]) {
     this.MPG = $event;
-    // console.log(this.MPG);
   }
 
   public getCSVFromChild($event: PredictionCVSDto[]) {
     this.CSV = $event;
-    // console.log(this.CSV);
   }
 
   public getLoadingData() {
     this.isLoaded = true;
-    console.log(this.isLoaded);
   }
 
   public isLoading: boolean = false;
@@ -61,9 +58,8 @@ export class PredictionComponent implements OnInit {
 
   public constructor(
     private readonly predictService: PredictService,
-    public http: HttpClient
-  ) // public dataPicker: YearPickerComponent
-  {}
+    public http: HttpClient // public dataPicker: YearPickerComponent
+  ) {}
 
   public async ngOnInit() {
     // this.form.addControl('Model year', this._yearPickerCtrl);

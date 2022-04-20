@@ -1,7 +1,16 @@
 <div class="wrap">
   <mat-card class="left">
     <mat-toolbar-row class="mat-elevation-z1">
-      <h3 class="action-title">Actions</h3>
+      <h3>Actions</h3>
+      <mat-form-field class="filter_button" appearance="outline">
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Filter"
+          #input
+        />
+      </mat-form-field>
     </mat-toolbar-row>
     <ng-container *ngTemplateOutlet="browseCSV"> </ng-container>
   </mat-card>
@@ -60,10 +69,10 @@
       <!-- MPG Column -->
       <ng-container matColumnDef="MPG">
         <mat-header-cell *matHeaderCellDef> MPG </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{ element.MPG }} </mat-cell>
+        <mat-cell *matCellDef="let element" [innerHTML]="element.MPG | bold: dataSource.filter"> </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
   </div>
@@ -78,54 +87,75 @@
     <!-- Cylinders Column -->
     <ng-container matColumnDef="cylinders">
       <mat-header-cell *matHeaderCellDef> Cylinders </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.cylinders }} </mat-cell>
+      <mat-cell
+        *matCellDef="let element"
+        [innerHTML]="element.cylinders | bold: dataSource2.filter"
+      >
+      </mat-cell>
     </ng-container>
 
     <!-- Displacement Column -->
     <ng-container matColumnDef="displacement">
       <mat-header-cell *matHeaderCellDef> Displacement </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{ element.displacement }}
+      <mat-cell
+        *matCellDef="let element"
+        [innerHTML]="element.displacement | bold: dataSource2.filter"
+      >
       </mat-cell>
     </ng-container>
 
     <!-- Horsepower Column -->
     <ng-container matColumnDef="horsepower">
       <mat-header-cell *matHeaderCellDef> Horsepower </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{ element.horsepower }}
+      <mat-cell
+        *matCellDef="let element"
+        [innerHTML]="element.horsepower | bold: dataSource2.filter"
+      >
       </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="weight">
       <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.weight }} </mat-cell>
+      <mat-cell
+        *matCellDef="let element"
+        [innerHTML]="element.weight | bold: dataSource2.filter"
+      ></mat-cell>
     </ng-container>
 
     <!-- Acceleration Column -->
     <ng-container matColumnDef="acceleration">
       <mat-header-cell *matHeaderCellDef> Acceleration </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{ element.acceleration }}
+      <mat-cell
+        *matCellDef="let element"
+        [innerHTML]="element.acceleration | bold: dataSource2.filter"
+      >
       </mat-cell>
     </ng-container>
 
     <!-- Model Year Column -->
     <ng-container matColumnDef="model_year">
       <mat-header-cell *matHeaderCellDef> Model Year </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{ element.model_year }}
+      <mat-cell
+        *matCellDef="let element"
+        [innerHTML]="element.model_year | bold: dataSource2.filter"
+      >
       </mat-cell>
     </ng-container>
 
     <!-- Origin Column -->
     <ng-container matColumnDef="origin">
       <mat-header-cell *matHeaderCellDef> Origin </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.origin }} </mat-cell>
+      <mat-cell
+        *matCellDef="let element"
+        [innerHTML]="element.origin | bold: dataSource2.filter"
+      ></mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns2"></mat-row>
+
+    <!-- Row shown when there is no matching data. -->
+      <div class="no_data" *matNoDataRow>No data matching the filter "{{input.value}}"</div>
   </mat-table>
 </ng-template>

@@ -76,7 +76,6 @@ export class PredictionGridComponent {
         console.log('error is occured while reading file!');
       };
     } else {
-      alert('Please import valid .csv file.');
       this.fileReset();
     }
   }
@@ -110,6 +109,13 @@ export class PredictionGridComponent {
         this.dataLoaded();
         this.isLoading = false;
       }
+    }
+  }
+
+  public applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    if (filterValue && this.dataSource2) {
+      this.dataSource2.filter = filterValue.trim().toLowerCase();
     }
   }
 

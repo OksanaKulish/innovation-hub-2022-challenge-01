@@ -56,7 +56,7 @@ export class LineChartComponent implements AfterContentInit {
           lineWidth: 1,
         },
         {
-          name: 'model_year',
+          name: 'Model Year',
           data: this.m_y,
           type: 'line',
           lineWidth: 1,
@@ -72,6 +72,9 @@ export class LineChartComponent implements AfterContentInit {
       tooltip: {
         shared: true,
       },
+      credits: {
+        enabled: false,
+      },
       legend: {
         layout: 'vertical',
         align: 'left',
@@ -81,6 +84,11 @@ export class LineChartComponent implements AfterContentInit {
         floating: true,
         backgroundColor: 'white',
       },
+      // chart: {
+      //   polar: true,
+      //   type: 'line',
+      //   backgroundColor: '#f5f5f5',
+      // },
     };
     this.chart = new Chart(this.chartOptions);
     setTimeout(() => {
