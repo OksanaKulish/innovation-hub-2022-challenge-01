@@ -7,3 +7,15 @@ export class InputDataDto {
   public "Model year"!: string;
   public Origin!: string;
 }
+
+
+
+export interface PredictionCVSDto {
+  cylinders: string;
+  weight: string;
+  displacement: string;
+  horsepower: string;
+  acceleration: string;
+  model_year: string;
+  origin: string;
+}

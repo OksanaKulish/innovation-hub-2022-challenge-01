@@ -33,25 +33,30 @@ mat-toolbar-row {
   color: rgba(0, 0, 0, 0.87);
 }
 
-.loading__center{
+.loading__center {
   margin-top: 20%;
   position: absolute;
-  margin-left: 40%
+  margin-left: 40%;
 }
 
 mat-card {
   padding: 0;
 }
 
-.mat-column-MPG {
-  min-width: max-content;
-  border-right: 1px solid currentColor;
-  padding-right: 24px;
-  text-align: center;
-}
+// .mat-column-MPG {
+//   min-width: max-content;
+//   border-right: 1px solid currentColor;
+//   padding-right: 24px;
+//   text-align: center;
+// }
 
-.mat-column-cylinders {
-  padding-left: 16px;
+// .mat-column-cylinders {
+//   padding-left: 16px;
+// }
+
+.mat-header-cell {
+  background-color: #f5f5f5;
+  font-weight: bold;
 }
 
 .no__date {
@@ -59,6 +64,11 @@ mat-card {
   padding-top: 15%;
   padding-left: 30%;
   font-size: medium;
+}
+
+.no_data {
+  margin-left: 30%;
+  margin-top: 5%;
 }
 
 /*Should be moved to upload-scv */
@@ -94,4 +104,21 @@ mat-card {
   justify-content: flex-end;
   padding-left: 15%;
   padding-top: 15%;
+}
+
+.filter_button {
+  margin: auto;
+  margin-right: 1%;
+}
+
+:host ::ng-deep mat-form-field .mat-form-field-outline-start {
+  background-color: white !important;
+}
+
+:host ::ng-deep mat-form-field .mat-form-field-outline-gap {
+  background-color: white !important;
+}
+
+:host ::ng-deep mat-form-field .mat-form-field-outline-end {
+  background-color: white !important;
 }

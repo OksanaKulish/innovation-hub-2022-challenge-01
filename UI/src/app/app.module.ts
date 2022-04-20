@@ -13,14 +13,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YearPickerComponent } from './shared/components/year-picker/year-picker.component';
-import { SharedModule } from './shared/components/shared.module';
 import { LayoutModule } from './layout/layout.module';
 import { ComponentsModule } from './components/components.module';
 import { ErrorInterceptor } from './web-api/interceptors/error-response.interceptor';
 import { DashboardModule } from './components/dashboard/dashboard.module';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,7 +33,8 @@ import { DashboardModule } from './components/dashboard/dashboard.module';
     SharedModule,
     LayoutModule,
     ComponentsModule,
-    DashboardModule
+    DashboardModule,
+    HighchartsChartModule
   ],
   providers: [
     HttpClient,

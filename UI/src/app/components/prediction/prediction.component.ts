@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PredictionCVSDto } from 'src/app/web-api/dto';
 import { PredictService } from 'src/app/web-api/services/predict.service';
-import { YearPickerComponent } from '../../shared/components/year-picker/year-picker.component';
+import { PredictionMPGDto } from '../prediction-grid/prediction-grid.component';
 
 @Component({
   selector: 'app-prediction',
@@ -13,6 +14,21 @@ import { YearPickerComponent } from '../../shared/components/year-picker/year-pi
   ],
 })
 export class PredictionComponent implements OnInit {
+  public MPG: PredictionMPGDto[] = [];
+  public CSV: PredictionCVSDto[] = [];
+  public isLoaded: boolean = false;
+  public getMPGFromChild($event: PredictionMPGDto[]) {
+    this.MPG = $event;
+  }
+
+  public getCSVFromChild($event: PredictionCVSDto[]) {
+    this.CSV = $event;
+  }
+
+  public getLoadingData() {
+    this.isLoaded = true;
+  }
+
   public isLoading: boolean = false;
   public label = 'Choose a Year';
   public predictedValue: string[] | undefined;
@@ -20,34 +36,41 @@ export class PredictionComponent implements OnInit {
 
   public form = new FormGroup({
     Cylinders: new FormControl(8, [Validators.required, Validators.min(0)]),
-    Displacement: new FormControl(307, [Validators.required, Validators.min(0)]),
+    Displacement: new FormControl(307, [
+      Validators.required,
+      Validators.min(0),
+    ]),
     Horsepower: new FormControl(130, [Validators.required, Validators.min(0)]),
     Weight: new FormControl(3504, [Validators.required, Validators.min(0)]),
     Acceleration: new FormControl(12, [Validators.required, Validators.min(0)]),
     Origin: new FormControl(1, [Validators.required, Validators.min(0)]),
+    'Model year': new FormControl(2022, [
+      Validators.required,
+      Validators.min(60),
+      Validators.max(2022),
+    ]),
   });
 
-  public _yearPickerCtrl: FormControl = new FormControl(
-    new Date('2022-01-17T03:24:00'),
-    Validators.required
-  );
+  // public _yearPickerCtrl: FormControl = new FormControl(
+  //   new Date('2022-01-17T03:24:00'),
+  //   Validators.required
+  // );
 
   public constructor(
     private readonly predictService: PredictService,
-    public http: HttpClient,
-    public dataPicker: YearPickerComponent
+    public http: HttpClient // public dataPicker: YearPickerComponent
   ) {}
 
   public async ngOnInit() {
-    this.form.addControl('Model year', this._yearPickerCtrl);
+    // this.form.addControl('Model year', this._yearPickerCtrl);
   }
 
   public async onPredict() {
     this.isLoading = true;
-    this.dataPicker.writeValue(this._yearPickerCtrl.value);
-    this.form.controls['Model year'].setValue(
-      this._yearPickerCtrl.value.getFullYear()
-    );
+    // this.dataPicker.writeValue(this._yearPickerCtrl.value);
+    // this.form.controls['Model year'].setValue(
+    //   this._yearPickerCtrl.value.getFullYear()
+    // );
 
     if (this.form.valid) {
       try {
@@ -64,7 +87,7 @@ export class PredictionComponent implements OnInit {
 
   public onResetPrediction() {
     this.form.reset();
-    this._yearPickerCtrl.setValue(null);
+    // this._yearPickerCtrl.setValue(null);
   }
 
   public isCtrlValid(ctrl: string) {

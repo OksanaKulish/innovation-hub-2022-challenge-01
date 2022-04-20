@@ -1,10 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  CompactType,
-  DisplayGrid,
   GridsterConfig,
   GridsterItem,
-  GridType,
 } from 'angular-gridster2';
 import { DashboardGridsterConfigService } from './dashboard-gridster-config.service';
 
@@ -23,15 +20,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.config = this.dashboardGridsterConfigService.getConfig();
     this.items = [
-      // { cols: 1, rows: 2 },
-      // { cols: 1, rows: 1 },
-      // { cols: 1, rows: 2 },
+      { cols: 1, rows: 2 },
     ];
   }
-
-  // changedOptions() {
-  //   this.options.api.optionsChanged();
-  // }
 
   removeItem(item: GridsterItem) {
     this.items.splice(this.items.indexOf(item), 1);
