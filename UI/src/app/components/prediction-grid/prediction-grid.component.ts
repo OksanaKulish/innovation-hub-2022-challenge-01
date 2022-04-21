@@ -114,6 +114,13 @@ export class PredictionGridComponent {
 
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+    if (filterValue && this.dataSource) {
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+  }
+
+  public applyFilterGridCSV(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
     if (filterValue && this.dataSource2) {
       this.dataSource2.filter = filterValue.trim().toLowerCase();
     }
@@ -134,8 +141,9 @@ export class PredictionGridComponent {
   ) {
     for (let i = 1; i < csvRecordsArray.length; i++) {
       let currantRecord = (<string>csvRecordsArray[i]).split(',');
-      if (currantRecord.length == headerLength) {
+      if (currantRecord.length === headerLength) {
         this.grid2.push({
+          mpg: currantRecord[0].trim(),
           cylinders: currantRecord[1].trim(),
           displacement: currantRecord[2].trim(),
           horsepower: currantRecord[3].trim(),
@@ -152,4 +160,6 @@ export class PredictionGridComponent {
     this.csvReader.nativeElement.value = '';
     this.records = [];
   }
+
+  public showFiller = false;
 }

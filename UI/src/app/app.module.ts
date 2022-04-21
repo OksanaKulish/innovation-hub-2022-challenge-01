@@ -16,7 +16,6 @@ import { YearPickerComponent } from './shared/components/year-picker/year-picker
 import { LayoutModule } from './layout/layout.module';
 import { ComponentsModule } from './components/components.module';
 import { ErrorInterceptor } from './web-api/interceptors/error-response.interceptor';
-import { DashboardModule } from './components/dashboard/dashboard.module';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { SharedModule } from './shared/shared.module';
 
@@ -33,7 +32,6 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     LayoutModule,
     ComponentsModule,
-    DashboardModule,
     HighchartsChartModule
   ],
   providers: [

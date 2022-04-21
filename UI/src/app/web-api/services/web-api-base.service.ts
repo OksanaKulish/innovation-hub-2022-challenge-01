@@ -75,7 +75,6 @@ export abstract class WebApiBaseService {
     response: HttpResponse<Object> | undefined
   ): Promise<T> {
     if (response == undefined) {
-      console.error('Response is undefined!!!!');
       return Object as any as T;
     }
 
@@ -88,7 +87,6 @@ export abstract class WebApiBaseService {
     }
 
     if (!this.text) {
-      console.log(this.text);
       return this.text as any as T;
     }
 

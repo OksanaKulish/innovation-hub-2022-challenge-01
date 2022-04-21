@@ -3,16 +3,27 @@
     <ng-container *ngTemplateOutlet="manualDateSet"> </ng-container>
   </mat-tab>
   <mat-tab label="Upload Data From CSV">
-    <app-prediction-grid (MPGAction)="getMPGFromChild($event)" (CSVAction)="getCSVFromChild($event)" (loadingAction)="getLoadingData()"></app-prediction-grid>
+    <app-prediction-grid
+      (MPGAction)="getMPGFromChild($event)"
+      (CSVAction)="getCSVFromChild($event)"
+      (loadingAction)="getLoadingData()"
+    ></app-prediction-grid>
   </mat-tab>
-  <mat-tab *ngIf="isLoaded" label="Dashboard" >
-    <app-line-chart [MPGFromParent]="MPG" [CSVFromParent]="CSV"></app-line-chart>
-
+  <mat-tab *ngIf="isLoaded" label="Dashboard">
+    <div class="charts--flex">
+      <app-line-chart
+        [MPGFromParent]="MPG"
+        [CSVFromParent]="CSV"
+      ></app-line-chart>
+      <app-scatter-plot
+        [MPGFromParent]="MPG"
+        [CSVFromParent]="CSV"
+      ></app-scatter-plot>
+    </div>
   </mat-tab>
 </mat-tab-group>
 
 <ng-template #manualDateSet>
-  <!-- <div class="container"> -->
   <mat-card class="mat-elevation-z3 input-card">
     <mat-card-title class="card-container">
       <div class="action__left" align="end">
@@ -63,7 +74,6 @@
               Field {{ isCtrlValid("Acceleration")[0] }} is required.
             </mat-error>
           </mat-form-field>
-
 
           <mat-form-field class="input-margin input-width" appearance="fill">
             <mat-label> Model year </mat-label>
@@ -119,5 +129,4 @@
       <h2>{{ predictedValue ?? 0 }}</h2>
     </mat-card>
   </ng-template>
-  <!-- </div> -->
 </ng-template>

@@ -6,12 +6,10 @@ import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
 import { PredictionComponent } from './prediction/prediction.component';
 import { PredictionGridComponent } from './prediction-grid/prediction-grid.component';
-import { GridsterModule } from 'angular-gridster2';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { LineChartComponent } from '../shared/components/line-chart/line-chart.component';
 
 const SHARED_DECLARATIVES = [
-  PredictionComponent
+  PredictionComponent,
+  PredictionGridComponent
 ];
 
 @NgModule({
@@ -19,11 +17,9 @@ const SHARED_DECLARATIVES = [
       CommonModule,
       FormsModule,
       RouterModule,
-      GridsterModule,
       MaterialModule,
       ReactiveFormsModule,
       SharedModule,
-      DashboardModule,
     ],
     providers: [
       ],
@@ -33,7 +29,6 @@ const SHARED_DECLARATIVES = [
     ],
     declarations: [
       SHARED_DECLARATIVES,
-      PredictionGridComponent,
     ]
 })
 export class ComponentsModule { }
