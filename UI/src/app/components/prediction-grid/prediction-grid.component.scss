@@ -43,17 +43,6 @@ mat-card {
   padding: 0;
 }
 
-// .mat-column-MPG {
-//   min-width: max-content;
-//   border-right: 1px solid currentColor;
-//   padding-right: 24px;
-//   text-align: center;
-// }
-
-// .mat-column-cylinders {
-//   padding-left: 16px;
-// }
-
 .mat-header-cell {
   background-color: #f5f5f5;
   font-weight: bold;
@@ -71,7 +60,7 @@ mat-card {
   margin-top: 5%;
 }
 
-/*Should be moved to upload-scv */
+/*TODO: Should be moved to upload-scv */
 .card__button--right {
   .icon-upload {
     font-size: large;

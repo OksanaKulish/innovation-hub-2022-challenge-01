@@ -18,6 +18,10 @@ export class ScatterPlotComponent implements AfterContentInit {
 
   public updateFlag: boolean = true;
   public chart: any;
+
+  public predictedMPG: any[] = [];
+  public expectedMPG: any[] = [];
+
   public chartCallback: Highcharts.ChartCallbackFunction = (chart) => {
     this.chart = chart;
   };
@@ -25,7 +29,7 @@ export class ScatterPlotComponent implements AfterContentInit {
   public ngAfterContentInit(): void {
     this.chartOptions = {
       chart: {
-        zoomType: 'x',
+        zoomType: 'x'
       },
       title: {
         text: 'Compare predicted and expecte values.',
@@ -38,19 +42,18 @@ export class ScatterPlotComponent implements AfterContentInit {
       },
       xAxis: {
         gridLineWidth: 1,
-        // categories: [1,2,3,4,5],
       },
 
       series: [
         {
           name: 'Expected Value',
-          data: this.c,
+          data: this.expectedMPG,
           type: 'line',
           lineWidth: 1,
         },
         {
           name: 'Predicted Value',
-          data: this.d,
+          data: this.predictedMPG,
           type: 'scatter',
           marker: {
             radius: 1.5,
@@ -98,25 +101,21 @@ export class ScatterPlotComponent implements AfterContentInit {
     }, 1);
   }
 
-  d: any[] = [];
-  c: any[] = [];
-
-  public visualize() {
-    console.log(this.CSVFromParent);
+  private visualize() {
     this.MPGFromParent.forEach((i) => {
       if (i) {
-        this.d.push(Number(i['MPG']));
+        this.predictedMPG.push(Number(i['MPG']));
       }
     });
 
     this.CSVFromParent.forEach((i) => {
       if (i) {
-        this.c.push(Number(i['mpg']));
+        this.expectedMPG.push(Number(i['mpg']));
       }
     });
-    this.c.sort();
-    this.d.sort();
-    this.chart.series[0].setData(this.c);
-    this.chart.series[1].setData(this.d);
+    this.expectedMPG.sort();
+    this.predictedMPG.sort();
+    this.chart.series[0].setData(this.expectedMPG);
+    this.chart.series[1].setData(this.predictedMPG);
   }
 }

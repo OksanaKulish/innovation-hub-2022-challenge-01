@@ -22,17 +22,27 @@ export class LineChartComponent implements AfterContentInit {
     this.chart = chart;
   };
 
+  public d: any[] = [];
+  public c: any[] = [];
+  public h: any[] = [];
+  public w: any[] = [];
+  public a: any[] = [];
+  public m_y: any[] = [];
+  public o: any[] = [];
+
   public ngAfterContentInit(): void {
     this.chartOptions = {
       chart: {
-        zoomType: 'x'
+        zoomType: 'x',
       },
       title: {
         text: 'How the value of the prediction depends on the input parameters.',
       },
       subtitle: {
-        text: document.ontouchstart === undefined ?
-          'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+        text:
+          document.ontouchstart === undefined
+            ? 'Click and drag in the plot area to zoom in'
+            : 'Pinch the chart to zoom in',
       },
       xAxis: {
         gridLineWidth: 1,
@@ -76,11 +86,13 @@ export class LineChartComponent implements AfterContentInit {
           lineWidth: 1,
         },
       ],
-      yAxis: [{
-        title: {
-          text: null
+      yAxis: [
+        {
+          title: {
+            text: null,
+          },
         },
-      }],
+      ],
       tooltip: {
         shared: true,
       },
@@ -95,11 +107,6 @@ export class LineChartComponent implements AfterContentInit {
         y: 40,
         floating: true,
       },
-      // chart: {
-      //   polar: true,
-      //   type: 'line',
-      //   backgroundColor: '#f5f5f5',
-      // },
     };
     this.chart = new Chart(this.chartOptions);
     setTimeout(() => {
@@ -107,15 +114,7 @@ export class LineChartComponent implements AfterContentInit {
     }, 1);
   }
 
-  d: any[] = [];
-  c: any[] = [];
-  h: any[] = [];
-  w: any[] = [];
-  a: any[] = [];
-  m_y: any[] = [];
-  o: any[] = [];
-
-  public visualize() {
+  private visualize() {
     this.MPGFromParent.forEach((i) => {
       if (i) {
         this.d.push(Number(i['MPG']));
