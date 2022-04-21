@@ -18,4 +18,5 @@ export interface PredictionCVSDto {
   acceleration: string;
   model_year: string;
   origin: string;
+  mpg?: string;
 }

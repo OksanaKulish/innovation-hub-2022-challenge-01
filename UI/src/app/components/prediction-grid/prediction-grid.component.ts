@@ -116,6 +116,7 @@ export class PredictionGridComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     if (filterValue && this.dataSource2) {
       this.dataSource2.filter = filterValue.trim().toLowerCase();
+      this.dataSource.filter = filterValue.trim().toLowerCase();
     }
   }
 
@@ -136,6 +137,7 @@ export class PredictionGridComponent {
       let currantRecord = (<string>csvRecordsArray[i]).split(',');
       if (currantRecord.length == headerLength) {
         this.grid2.push({
+          mpg: currantRecord[0].trim(),
           cylinders: currantRecord[1].trim(),
           displacement: currantRecord[2].trim(),
           horsepower: currantRecord[3].trim(),

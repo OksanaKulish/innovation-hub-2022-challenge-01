@@ -9,8 +9,8 @@ import { UploadScvComponent } from './components/upload-scv/upload-scv.component
 import { TooltipComponent } from './components/tooltip/tooltip.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { GridsterModule } from 'angular-gridster2';
 import { BoldPipe } from './pipes/bold.pipe';
+import { ScatterPlotComponent } from './components/scatter-plot/scatter-plot.component';
 
 const SHARED_DECLARATIVES = [
   LoadingBarComponent,
@@ -18,7 +18,8 @@ const SHARED_DECLARATIVES = [
   UploadScvComponent,
   TooltipComponent,
   LineChartComponent,
-  BoldPipe
+  BoldPipe,
+  ScatterPlotComponent
 ];
 
 @NgModule({
@@ -28,8 +29,7 @@ const SHARED_DECLARATIVES = [
     RouterModule,
     MaterialModule,
     ReactiveFormsModule,
-    HighchartsChartModule,
-    GridsterModule
+    HighchartsChartModule
   ],
   exports: SHARED_DECLARATIVES,
   declarations: SHARED_DECLARATIVES,

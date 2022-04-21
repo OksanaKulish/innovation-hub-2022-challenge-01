@@ -24,10 +24,18 @@ export class LineChartComponent implements AfterContentInit {
 
   public ngAfterContentInit(): void {
     this.chartOptions = {
+      chart: {
+        zoomType: 'x'
+      },
       title: {
         text: 'How the value of the prediction depends on the input parameters.',
       },
+      subtitle: {
+        text: document.ontouchstart === undefined ?
+          'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+      },
       xAxis: {
+        gridLineWidth: 1,
         categories: this.d,
       },
       series: [
@@ -68,7 +76,11 @@ export class LineChartComponent implements AfterContentInit {
           lineWidth: 1,
         },
       ],
-      yAxis: [{}],
+      yAxis: [{
+        title: {
+          text: null
+        },
+      }],
       tooltip: {
         shared: true,
       },
@@ -78,11 +90,10 @@ export class LineChartComponent implements AfterContentInit {
       legend: {
         layout: 'vertical',
         align: 'left',
-        x: 80,
+        x: 30,
         verticalAlign: 'top',
-        y: 55,
+        y: 40,
         floating: true,
-        backgroundColor: 'white',
       },
       // chart: {
       //   polar: true,
