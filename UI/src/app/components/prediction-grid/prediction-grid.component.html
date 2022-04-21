@@ -72,7 +72,7 @@
         <mat-cell *matCellDef="let element" [innerHTML]="element.MPG | bold: dataSource.filter"> </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
   </div>
@@ -153,7 +153,7 @@
       ></mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns2"></mat-row>
 
     <!-- Row shown when there is no matching data. -->
