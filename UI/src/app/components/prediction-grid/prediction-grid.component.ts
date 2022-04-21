@@ -114,9 +114,15 @@ export class PredictionGridComponent {
 
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+    if (filterValue && this.dataSource) {
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+  }
+
+  public applyFilterGridCSV(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
     if (filterValue && this.dataSource2) {
       this.dataSource2.filter = filterValue.trim().toLowerCase();
-      this.dataSource.filter = filterValue.trim().toLowerCase();
     }
   }
 

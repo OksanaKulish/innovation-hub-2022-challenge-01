@@ -1,38 +1,29 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-      <div class="actions__header--flex mat-elevation-z1">
-      <h3>Actions</h3>
-      <mat-form-field class="filter_button" appearance="standard">
-        <mat-icon matPrefix>search</mat-icon>
-        <input
-          matInput
-          (keyup)="applyFilter($event)"
-          placeholder="Filter"
-          #input
-        />
-      </mat-form-field>
-      </div>
+    <div class="actions__header--flex mat-elevation-z1">
+      <h2>Actions</h2>
+    </div>
     <ng-container *ngTemplateOutlet="browseCSV"> </ng-container>
   </mat-drawer>
 
-    <div class="wrap">
-      <button type="button" mat-button (click)="drawer.toggle()">
-        <mat-icon>arrow_back_ios</mat-icon>
-      </button>
-      <mat-card class="right mat-elevation-z3">
-        <div *ngIf="dataSource; then grid; else noData"></div>
-        <mat-spinner class="loading__center" *ngIf="isLoading"></mat-spinner>
-        <ng-template #grid>
-          <ng-container *ngTemplateOutlet="gridMGP"> </ng-container>
-          <ng-container *ngTemplateOutlet="gridCSV"> </ng-container>
-        </ng-template>
-        <ng-template #noData>
-          <div class="no__date">
-            Browse file for data preview and MPG prediction.
-          </div>
-        </ng-template>
-      </mat-card>
-    </div>
+  <div class="wrap">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <mat-card class="right mat-elevation-z3">
+      <div *ngIf="dataSource; then grid; else noData"></div>
+      <mat-spinner class="loading__center" *ngIf="isLoading"></mat-spinner>
+      <ng-template #grid>
+        <ng-container *ngTemplateOutlet="gridMGP"> </ng-container>
+        <ng-container *ngTemplateOutlet="gridCSV"> </ng-container>
+      </ng-template>
+      <ng-template #noData>
+        <div class="no__date">
+          Browse file for data preview and MPG prediction.
+        </div>
+      </ng-template>
+    </mat-card>
+  </div>
 </mat-drawer-container>
 
 <ng-template #browseCSV>
@@ -67,6 +58,15 @@
 
 <ng-template #gridMGP>
   <div class="mpg-table">
+    <mat-form-field class="filter_button" appearance="standard">
+      <mat-icon matPrefix>search</mat-icon>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Filter"
+        #input
+      />
+    </mat-form-field>
     <mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
       <!-- MPG Column -->
       <ng-container matColumnDef="MPG">
@@ -88,6 +88,15 @@
 
 <ng-template #gridCSV>
   <div class="csv-table">
+    <mat-form-field class="filter_button--right" appearance="standard">
+      <mat-icon matPrefix>search</mat-icon>
+      <input
+        matInput
+        (keyup)="applyFilterGridCSV($event)"
+        placeholder="Filter"
+        #input
+      />
+    </mat-form-field>
     <mat-table mat-table [dataSource]="dataSource2" class="mat-elevation-z1">
       <!-- Cylinders Column -->
       <ng-container matColumnDef="cylinders">
@@ -164,7 +173,7 @@
 
       <!-- Row shown when there is no matching data. -->
       <div class="no_data" *matNoDataRow>
-        No data matching the filter "{{ input.value }}"
+        <!-- No data matching the filter. -->
       </div>
     </mat-table>
   </div>
