@@ -60,11 +60,11 @@
 </ng-template>
 
 <ng-template #gridMGP>
-  <div class="grid">
+  <div class="mpg-table">
     <mat-table
       mat-table
       [dataSource]="dataSource"
-      class="mat-elevation-z1 mpg-table"
+      class="mat-elevation-z1"
     >
       <!-- MPG Column -->
       <ng-container matColumnDef="MPG">
@@ -79,10 +79,11 @@
 </ng-template>
 
 <ng-template #gridCSV>
+  <div class="csv-table">
   <mat-table
     mat-table
     [dataSource]="dataSource2"
-    class="mat-elevation-z1 csv-table"
+    class="mat-elevation-z1"
   >
     <!-- Cylinders Column -->
     <ng-container matColumnDef="cylinders">
@@ -158,4 +159,5 @@
     <!-- Row shown when there is no matching data. -->
       <div class="no_data" *matNoDataRow>No data matching the filter "{{input.value}}"</div>
   </mat-table>
+</div>
 </ng-template>

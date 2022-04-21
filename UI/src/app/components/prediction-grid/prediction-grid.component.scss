@@ -1,9 +1,13 @@
 .mpg-table {
   max-width: max-content;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .csv-table {
   width: -webkit-fill-available;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .wrap {
@@ -111,3 +115,8 @@ mat-card {
 :host ::ng-deep mat-form-field .mat-form-field-outline-end {
   background-color: white !important;
 }
+
+mat-table {
+  width: 100%;
+}
+
