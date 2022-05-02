@@ -1,6 +1,21 @@
 <mat-toolbar>
   <mat-icon>verified_user</mat-icon>
   <h2>INNOVATION HUB 2022 CHALLENGE 01</h2>
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="user__profile">
+    <div class="userName__title" *ngIf="userName">{{userName}}</div>
+    <mat-icon>account_circle</mat-icon>
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>dialpad</mat-icon>
+      <span>{{userName}}</span>
+    </button>
+    <button mat-menu-item (click)="logOut()">
+      <mat-icon>voicemail</mat-icon>
+      <span>Log Out</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
 
 <mat-toolbar-row *ngIf="isShow">

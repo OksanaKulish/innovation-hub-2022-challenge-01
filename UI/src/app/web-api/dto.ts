@@ -8,8 +8,6 @@ export class InputDataDto {
   public Origin!: string;
 }
 
-
-
 export interface PredictionCVSDto {
   cylinders: string;
   weight: string;
