@@ -6,6 +6,7 @@ import { MaterialModule } from '../material.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
+import { PageContainerComponent } from './page-container/page-container.component';
 
 const SHARED_DECLARATIVES = [
   HeaderComponent,
@@ -24,7 +25,8 @@ const SHARED_DECLARATIVES = [
     ],
     declarations: [
       SHARED_DECLARATIVES,
-      SideMenuComponent
+      SideMenuComponent,
+      PageContainerComponent
     ]
 })
 export class LayoutModule { }

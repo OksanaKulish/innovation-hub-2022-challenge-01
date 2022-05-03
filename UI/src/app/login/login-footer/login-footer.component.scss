@@ -1,0 +1,19 @@
+.footer {
+  background-color: #232f3e;
+  color: white;
+  position: fixed;
+  height: 8%;
+  bottom:0;
+  left: 0;
+  right: 0;
+  min-width: 110px;
+  z-index: 99;
+}
+
+.sub-title {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding-top: 0.5%;
+  padding-right: 2%;
+}

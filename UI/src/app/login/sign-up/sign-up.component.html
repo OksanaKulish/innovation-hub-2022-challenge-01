@@ -1,0 +1,68 @@
+<app-login-header></app-login-header>
+<div class="page__container">
+  <div class="log__pic">
+    <div class="modal">
+      <ng-container [ngTemplateOutlet]="isConfirm ? code : sign"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #sign>
+  <form [formGroup]="form" (ngSubmit)="signUp()">
+    <div class="login__container">
+      <h2 class="log__title">Sign Up</h2>
+      <mat-form-field appearance="outline">
+        <mat-label> Email </mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="Ex. test@test.com"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Password </mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password"
+          placeholder="Password"
+          [type]="hide ? 'password' : 'text'"
+        />
+        <mat-icon class="password__icon" matSuffix (click)="hide = !hide">{{
+          hide ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Given Name </mat-label>
+        <input matInput formControlName="givenName" placeholder="Given Name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Family Name </mat-label>
+        <input
+          matInput
+          formControlName="familyName"
+          placeholder="Family Name"
+        />
+      </mat-form-field>
+
+      <button class="logIn__button">Sign Up</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #code>
+  <form [formGroup]="form" (ngSubmit)="confirmSignUp()">
+    <div class="login__container">
+      <h2 class="log__title">Please confirm code from your email</h2>
+      <mat-form-field appearance="outline">
+        <mat-label> Code </mat-label>
+        <input matInput formControlName="code" placeholder="Code" />
+      </mat-form-field>
+      <button class="logIn__button" type="submit">Confirm</button>
+    </div>
+  </form>
+</ng-template>
+<app-login-footer></app-login-footer>

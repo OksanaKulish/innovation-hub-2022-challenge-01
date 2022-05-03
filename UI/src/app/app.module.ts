@@ -18,9 +18,15 @@ import { ComponentsModule } from './components/components.module';
 import { ErrorInterceptor } from './web-api/interceptors/error-response.interceptor';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { SharedModule } from './shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { LoginModule } from './login/login.module';
+import { ToastrModule } from 'ngx-toastr';
+import { JwtInterceptor } from './web-api/interceptors/jwt.interceptor';
+import { AuthGuard } from './web-api/services/auth.guard';
+import { HeaderComponent } from './layout/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,17 +38,30 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     LayoutModule,
     ComponentsModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    RouterModule,
+    LoginModule,
+    ToastrModule.forRoot({
+      closeButton: true,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [
     HttpClient,
     PredictService,
-    YearPickerComponent
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: ErrorInterceptor,
-    //   multi: true,
-    // },
+    YearPickerComponent,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
