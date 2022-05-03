@@ -23,6 +23,7 @@ import { LoginModule } from './login/login.module';
 import { ToastrModule } from 'ngx-toastr';
 import { JwtInterceptor } from './web-api/interceptors/jwt.interceptor';
 import { AuthGuard } from './web-api/services/auth.guard';
+import { HeaderComponent } from './layout/header/header.component';
 
 @NgModule({
   declarations: [AppComponent],

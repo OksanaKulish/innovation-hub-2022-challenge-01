@@ -1,0 +1,36 @@
+h2 {
+  margin-left: 5px;
+  color: white;
+}
+
+mat-icon {
+  color: white;
+}
+
+.sub-title {
+  color: white;
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
+
+mat-toolbar {
+  display: flex;
+  background-color: #232f3e;
+}
+
+mat-toolbar-row {
+  background-color: darkslategray;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+
+.user__profile {
+  margin-left: auto;
+  padding-right: 60px;
+}
+
+.userName__title {
+  color: white;
+  right: 70px;
+  position: absolute;
+}
