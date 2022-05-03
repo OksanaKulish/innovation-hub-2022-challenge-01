@@ -27,6 +27,10 @@ mat-toolbar-row {
 .user__profile {
   margin-left: auto;
   padding-right: 60px;
+  color: white;
+  .button__login {
+    margin-right: 20px;
+  }
 }
 
 .userName__title {
